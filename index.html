@@ -593,6 +593,174 @@
             margin-bottom: 2rem; /* Add space below the image */
         }
     }
+    
+    /* Experience Timeline Styles */
+    .timeline-container {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding-left: 20px;
+    }
+
+    .timeline-container::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+      top: 0;
+      bottom: 0;
+      left: 10px;
+      margin-left: -3px;
+    }
+
+    .timeline-item {
+      padding: 10px 0 20px 30px;
+      position: relative;
+      background-color: inherit;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      left: 3px;
+      background-color: var(--gradient-end);
+      border: 2px solid var(--gradient-start);
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .timeline-content {
+      padding: 20px 30px;
+      background-color: var(--secondary-bg);
+      position: relative;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 15px var(--shadow-color-dark);
+      border: 1px solid var(--card-border-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px var(--shadow-color-light);
+    }
+    
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .modal.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .modal-content {
+      background-color: var(--secondary-bg);
+      padding: 2.5rem;
+      border-radius: 0.75rem;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    }
+
+    .close-button {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      color: var(--primary-text);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .close-button:hover {
+      color: var(--gradient-start);
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .gallery img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        transition: transform 0.2s ease;
+        object-fit: cover;
+    }
+
+    .gallery img:hover {
+        transform: scale(1.05);
+    }
+
+    .links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .modal-button {
+      display: block;
+      padding: 0.75rem 1.25rem;
+      background-color: var(--primary-bg);
+      border: 1px solid var(--card-border-color);
+      border-radius: 0.5rem;
+      transition: all 0.2s ease;
+      text-align: center;
+      color: var(--primary-text);
+      cursor: pointer;
+    }
+
+    .modal-button:hover {
+      transform: translateY(-2px);
+      background-color: var(--gradient-start);
+      color: var(--primary-bg);
+      border-color: var(--gradient-start);
+    }
+    
+    .message-card {
+        background-color: var(--secondary-bg);
+        padding: 2.5rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 15px var(--shadow-color-dark);
+        border: 1px solid var(--card-border-color);
+        max-width: 500px;
+        text-align: center;
+        animation: fadeInScale 0.3s ease-out forwards;
+    }
+
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
   </style>
 </head>
 <body class="bg-dark-bg text-gray-200">
@@ -694,7 +862,7 @@
             <a href="https://drive.google.com/file/d/1SSyHPlsCWNcQt00IsYQYcQcG6tl4Y5cb/view?usp=sharing" target="_blank" class="btn-primary inline-flex items-center py-3 px-6 rounded-lg shadow-md">
               View Resume
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd" />
               </svg>
             </a>
           </div>
@@ -809,7 +977,47 @@
     </div>
   </section>
 
-  <section id="projects" class="bg-secondary-bg text-secondary-text border-t border-gray-800">
+  <section id="experience" class="bg-secondary-bg text-secondary-text border-t border-gray-800">
+      <div class="container mx-auto px-4">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative" data-aos="fade-up">
+              <span class="gradient-text">Experience</span>
+              <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-gradient-start to-gradient-end rounded-full shadow-md shadow-orange-500/40"></div>
+          </h2>
+
+          <div class="timeline-container">
+              <!-- Google Student Ambassador -->
+              <div class="timeline-item" data-aos="fade-right" data-aos-duration="600">
+                  <div class="timeline-content">
+                      <h3 class="text-xl font-semibold text-primary-text mb-1">Google Student Ambassador</h3>
+                      <p class="text-sm font-medium text-gray-400 mb-2">July 2025 - Present</p>
+                      <ul class="list-disc list-inside space-y-2 text-secondary-text">
+                          <li>Representing Google on campus and fostering a tech community.</li>
+                          <li>Organizing workshops and events to educate students on Google technologies.</li>
+                          <li>Acting as a liaison between students and Google to share feedback and resources.</li>
+                      </ul>
+                      <button class="btn-primary mt-4 py-2 px-4 text-sm" onclick="showGoogleMessage()">View Work</button>
+                  </div>
+              </div>
+              
+              <!-- Front-end Development Internship at IBM -->
+              <div class="timeline-item" data-aos="fade-left" data-aos-duration="600">
+                  <div class="timeline-content">
+                      <h3 class="text-xl font-semibold text-primary-text mb-1">Front-end Development Intern</h3>
+                      <p class="text-sm font-medium text-gray-400 mb-2">Aug 2025 - Oct 2025</p>
+                      <ul class="list-disc list-inside space-y-2 text-secondary-text">
+                          <li>Participating in a 6-week internship program focused on front-end development.</li>
+                          <li>Learning and applying best practices for building responsive and modern user interfaces.</li>
+                          <li>Collaborating with mentors and peers on assigned development tasks.</li>
+                      </ul>
+                      <button class="btn-primary mt-4 py-2 px-4 text-sm" onclick="showWork('ibm')">View Work</button>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+  </section>
+
+  <section id="projects" class="bg-primary-bg text-secondary-text border-t border-gray-800">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative" data-aos="fade-up">
         <span class="gradient-text">My Projects</span>
@@ -855,7 +1063,7 @@
     </div>
   </section>
 
-  <section id="skills" class="bg-primary-bg text-secondary-text border-t border-gray-800">
+  <section id="skills" class="bg-secondary-bg text-secondary-text border-t border-gray-800">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative" data-aos="fade-up">
         <span class="gradient-text">My Skills</span>
@@ -1024,7 +1232,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-semibold text-primary-text mb-1">Python Bootcamp</h3>
-          <p class="text-secondary-text text-sm">Beginner level, Learning for Web Development</p>
+          <p class="text-secondary-text text-sm mb-4">Beginner level, Learning for Web Development</p>
           <p class="flex-grow mb-4 text-secondary-text">Comprehensive training in Python programming fundamentals and advanced topics.</p>
           <div class="flex justify-between items-center">
             <span class="text-gray-500 text-sm">2025</span>
@@ -1089,7 +1297,7 @@
     </div>
   </section>
 
-  <section id="contact" class="bg-secondary-bg text-secondary-text border-t border-gray-800">
+  <section id="contact" class="bg-primary-bg text-secondary-text border-t border-gray-800">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 relative" data-aos="fade-up">
         <span class="gradient-text">Get In Touch</span>
@@ -1216,6 +1424,32 @@
     </svg>
   </button>
 
+  <!-- Modal for View Work -->
+  <div id="workModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal()">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- New Modal for Project Message -->
+  <div id="projectMessageModal" class="modal">
+    <div class="message-card">
+        <p class="text-xl font-medium text-primary-text mb-4">Still internship training is going on, will build project soon based on guidance.</p>
+        <button class="btn-primary py-2 px-4 text-sm" onclick="closeProjectModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- New Modal for Google Ambassador Message -->
+  <div id="googleMessageModal" class="modal">
+    <div class="message-card">
+        <p class="text-xl font-medium text-primary-text mb-4">
+          I have just started this role and am excited to begin. Photos and updates will be shared here soon!
+        </p>
+        <button class="btn-primary py-2 px-4 text-sm" onclick="closeGoogleModal()">Close</button>
+    </div>
+  </div>
+
   <script id="app-script">
     // Define custom Tailwind colors for easier use
     tailwind.config = {
@@ -1235,8 +1469,66 @@
       }
     }
 
-    function showMessageBox(message) {
-        alert(message); // Using alert as per original code, consider a custom modal for better UX
+    // Modal functions for the Google Ambassador message
+    function showGoogleMessage() {
+        const modal = document.getElementById('googleMessageModal');
+        modal.classList.add('show');
+    }
+
+    function closeGoogleModal() {
+        const modal = document.getElementById('googleMessageModal');
+        modal.classList.remove('show');
+    }
+    
+    // Modal functions for the main work modal
+    function showWork(type) {
+      const modal = document.getElementById('workModal');
+      const modalBody = document.getElementById('modal-body');
+      
+      let content = '';
+
+      if (type === 'google') {
+          // This path is no longer needed but kept for reference if you change your mind
+          content = `
+            <h3 class="text-2xl font-semibold text-primary-text mb-6 text-center">Google Student Ambassador Work</h3>
+            <div class="gallery">
+                <img src="https://placehold.co/400x300?text=Google+Work+1" alt="Google Ambassador work 1" onerror="this.src='https://placehold.co/400x300/1e293b/94a3b8?text=Image+Unavailable'">
+                <img src="https://placehold.co/400x300?text=Google+Work+2" alt="Google Ambassador work 2" onerror="this.src='https://placehold.co/400x300/1e293b/94a3b8?text=Image+Unavailable'">
+                <img src="https://placehold.co/400x300?text=Google+Work+3" alt="Google Ambassador work 3" onerror="this.src='https://placehold.co/400x300/1e293b/94a3b8?text=Image+Unavailable'">
+                <img src="https://placehold.co/400x300?text=Google+Work+4" alt="Google Ambassador work 4" onerror="this.src='https://placehold.co/400x300/1e293b/94a3b8?text=Image+Unavailable'">
+                <img src="https://placehold.co/400x300?text=Google+Work+5" alt="Google Ambassador work 5" onerror="this.src='https://placehold.co/400x300/1e293b/94a3b8?text=Image+Unavailable'">
+                <img src="https://placehold.co/400x300?text=Google+Work+6" alt="Google Ambassador work 6" onerror="this.src='https://placehold.co/400x300/1e293b/94a3b8?text=Image+Unavailable'">
+            </div>
+          `;
+      } else if (type === 'ibm') {
+          content = `
+            <h3 class="text-2xl font-semibold text-primary-text mb-6 text-center">IBM Internship Details</h3>
+            <div class="links-list flex flex-col space-y-4">
+                <a href="https://drive.google.com/file/d/1e9qBYIbQXyL-kYCVvjxSQet58PFq0FFu/view?usp=drive_link" target="_blank" class="modal-button">View Offer Letter</a>
+                <a href="https://drive.google.com/drive/folders/1vpgPv2kK8kKxtD9ji6O_KPsptT6wCapm?usp=drive_link" target="_blank" class="modal-button">View Completed Course Certificates</a>
+                <button class="modal-button" onclick="openProjectModal()">View Project</button>
+            </div>
+          `;
+      }
+
+      modalBody.innerHTML = content;
+      modal.classList.add('show');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('workModal');
+      modal.classList.remove('show');
+    }
+
+    // New modal functions for the project message
+    function openProjectModal() {
+        const modal = document.getElementById('projectMessageModal');
+        modal.classList.add('show');
+    }
+
+    function closeProjectModal() {
+        const modal = document.getElementById('projectMessageModal');
+        modal.classList.remove('show');
     }
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -1253,12 +1545,12 @@
           const message = document.getElementById('message').value;
 
           if (!name || !email || !message) {
-            showMessageBox("Please fill in all fields before sending your message.");
+            alert("Please fill in all fields before sending your message.");
             e.preventDefault(); // Prevent the form from submitting if validation fails
             return;
           }
 
-          showMessageBox(`Thank you, ${name}! Your message is being sent. You will be redirected shortly.`);
+          alert(`Thank you, ${name}! Your message is being sent. You will be redirected shortly.`);
           // Formspree handles the actual POST request and redirection automatically.
           // No need for a custom fetch or setTimeout here.
         });
