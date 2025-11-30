@@ -1,946 +1,934 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+<script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+<style id="app-style">
+  /* CSS Variables for Theme */
+  :root {
+    /* Default Mode (Dark - Rich Black/Deep Purple) */
+    --primary-bg: #1A202C;
+    /* Deep Rich Black/Purple */
+    --secondary-bg: #2D3748;
+    /* Slightly lighter for cards */
+    --primary-text: #E2E8F0;
+    /* Off-white for readability */
+    --secondary-text: #A0AEC0;
+    /* Muted gray for secondary text */
+    --accent-color: #63B3ED;
+    /* Soft Blue - professional accent */
+    --gradient-start: #63B3ED;
+    /* Soft Blue for gradient start */
+    --gradient-end: #4299E1;
+    /* Slightly darker blue for gradient end */
+    --nav-link-color: #B0B0B0;
+    --nav-link-hover: var(--accent-color);
+    --card-border-color: rgba(99, 179, 237, 0.3);
+    /* Soft Blue border */
+    --shadow-color-dark: rgba(0, 0, 0, 0.6);
+    --shadow-color-light: rgba(99, 179, 237, 0.4);
+    /* Soft Blue shadow */
+    --heart-color: #EF4444;
+    /* Classic Red for hearts */
+  }
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rajeswar Charapalli | Portfolio</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
-    rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
-  <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
-  <style id="app-style">
-    /* CSS Variables for Theme */
-    :root {
-      /* Default Mode (Dark - Rich Black/Deep Purple) */
-      --primary-bg: #1A202C;
-      /* Deep Rich Black/Purple */
-      --secondary-bg: #2D3748;
-      /* Slightly lighter for cards */
-      --primary-text: #E2E8F0;
-      /* Off-white for readability */
-      --secondary-text: #A0AEC0;
-      /* Muted gray for secondary text */
-      --accent-color: #63B3ED;
-      /* Soft Blue - professional accent */
-      --gradient-start: #63B3ED;
-      /* Soft Blue for gradient start */
-      --gradient-end: #4299E1;
-      /* Slightly darker blue for gradient end */
-      --nav-link-color: #B0B0B0;
-      --nav-link-hover: var(--accent-color);
-      --card-border-color: rgba(99, 179, 237, 0.3);
-      /* Soft Blue border */
-      --shadow-color-dark: rgba(0, 0, 0, 0.6);
-      --shadow-color-light: rgba(99, 179, 237, 0.4);
-      /* Soft Blue shadow */
-      --heart-color: #EF4444;
-      /* Classic Red for hearts */
-    }
+  .gold-mode {
+    /* New Gold & Black Theme */
+    --primary-bg: #000000;
+    /* Black background */
+    --secondary-bg: #1A1A1A;
+    /* Slightly lighter black for cards */
+    --primary-text: #FFD700;
+    /* Gold for primary text */
+    --secondary-text: #C0C0C0;
+    /* Silver/Light Gray for secondary text */
+    --accent-color: #FFD700;
+    /* Gold accent */
+    --gradient-start: #FFD700;
+    /* Gold for gradient start */
+    --gradient-end: #FFA500;
+    /* Orange-Gold for gradient end */
+    --nav-link-color: #C0C0C0;
+    --nav-link-hover: var(--accent-color);
+    --card-border-color: rgba(255, 215, 0, 0.4);
+    /* Gold border */
+    --shadow-color-dark: rgba(0, 0, 0, 0.8);
+    --shadow-color-light: rgba(255, 215, 0, 0.4);
+    /* Gold shadow */
+    --heart-color: #FFD700;
+    /* Gold hearts */
+  }
 
-    .gold-mode {
-      /* New Gold & Black Theme */
-      --primary-bg: #000000;
-      /* Black background */
-      --secondary-bg: #1A1A1A;
-      /* Slightly lighter black for cards */
-      --primary-text: #FFD700;
-      /* Gold for primary text */
-      --secondary-text: #C0C0C0;
-      /* Silver/Light Gray for secondary text */
-      --accent-color: #FFD700;
-      /* Gold accent */
-      --gradient-start: #FFD700;
-      /* Gold for gradient start */
-      --gradient-end: #FFA500;
-      /* Orange-Gold for gradient end */
-      --nav-link-color: #C0C0C0;
-      --nav-link-hover: var(--accent-color);
-      --card-border-color: rgba(255, 215, 0, 0.4);
-      /* Gold border */
-      --shadow-color-dark: rgba(0, 0, 0, 0.8);
-      --shadow-color-light: rgba(255, 215, 0, 0.4);
-      /* Gold shadow */
-      --heart-color: #FFD700;
-      /* Gold hearts */
-    }
+  html,
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
 
-    html,
-    body {
-      overflow-x: hidden;
-      width: 100%;
-    }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--secondary-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    /* Smooth transition for theme change */
+  }
 
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: var(--primary-bg);
-      color: var(--secondary-text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      transition: background-color 0.5s ease, color 0.5s ease;
-      /* Smooth transition for theme change */
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-text);
+    /* Headings use primary text color */
+  }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: 'Poppins', sans-serif;
-      color: var(--primary-text);
-      /* Headings use primary text color */
-    }
+  .gradient-text {
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-    .gradient-text {
-      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+  /* .nav-link styles are no longer directly used for top nav but kept for general reference if needed elsewhere */
+  .nav-link {
+    position: relative;
+    color: var(--nav-link-color);
+    transition: color 0.3s ease;
+  }
 
-    /* .nav-link styles are no longer directly used for top nav but kept for general reference if needed elsewhere */
-    .nav-link {
-      position: relative;
-      color: var(--nav-link-color);
-      transition: color 0.3s ease;
-    }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--nav-link-hover);
+    transition: width 0.3s ease;
+  }
 
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -4px;
-      left: 0;
-      background-color: var(--nav-link-hover);
-      transition: width 0.3s ease;
-    }
+  .nav-link:hover {
+    color: var(--nav-link-hover);
+  }
 
-    .nav-link:hover {
-      color: var(--nav-link-hover);
-    }
+  .nav-link:hover::after {
+    width: 100%;
+  }
 
-    .nav-link:hover::after {
-      width: 100%;
-    }
+  .btn-primary {
+    transition: all 0.3s ease;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    /* Use theme gradients */
+    color: var(--primary-bg);
+    /* Text adapts to primary background */
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 10px var(--shadow-color-light);
+  }
 
-    .btn-primary {
-      transition: all 0.3s ease;
-      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-      /* Use theme gradients */
-      color: var(--primary-bg);
-      /* Text adapts to primary background */
-      border: none;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 10px var(--shadow-color-light);
-    }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-color-light);
+    background: linear-gradient(90deg, var(--gradient-end), var(--gradient-start));
+    /* Reverse gradient on hover */
+  }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px var(--shadow-color-light);
-      background: linear-gradient(90deg, var(--gradient-end), var(--gradient-start));
-      /* Reverse gradient on hover */
-    }
+  .btn-secondary {
+    transition: all 0.3s ease;
+    background-color: transparent;
+    border: 2px solid var(--gradient-start);
+    /* Use start of gradient for border */
+    color: var(--gradient-start);
+    /* Use start of gradient for text */
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 10px var(--shadow-color-light);
+  }
 
-    .btn-secondary {
-      transition: all 0.3s ease;
-      background-color: transparent;
-      border: 2px solid var(--gradient-start);
-      /* Use start of gradient for border */
-      color: var(--gradient-start);
-      /* Use start of gradient for text */
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 10px var(--shadow-color-light);
-    }
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    background-color: var(--gradient-start);
+    color: var(--primary-bg);
+    /* Text adapts to primary background */
+    box-shadow: 0 8px 20px var(--shadow-color-light);
+  }
 
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      background-color: var(--gradient-start);
-      color: var(--primary-bg);
-      /* Text adapts to primary background */
-      box-shadow: 0 8px 20px var(--shadow-color-light);
-    }
+  .card {
+    transition: all 0.3s ease;
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--card-border-color);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 15px var(--shadow-color-dark);
+  }
 
-    .card {
-      transition: all 0.3s ease;
-      background-color: var(--secondary-bg);
-      border: 1px solid var(--card-border-color);
-      border-radius: 0.75rem;
-      box-shadow: 0 4px 15px var(--shadow-color-dark);
-    }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-color-light);
+  }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px var(--shadow-color-light);
-    }
+  .skill-card {
+    transition: all 0.2s ease;
+    background-color: var(--secondary-bg);
+    /* Use secondary background for consistency */
+    border: 1px solid var(--card-border-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px var(--shadow-color-dark);
+  }
 
-    .skill-card {
-      transition: all 0.2s ease;
-      background-color: var(--secondary-bg);
-      /* Use secondary background for consistency */
-      border: 1px solid var(--card-border-color);
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 8px var(--shadow-color-dark);
-    }
+  .skill-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--shadow-color-light);
+  }
 
-    .skill-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px var(--shadow-color-light);
-    }
+  #animated-tagline {
+    display: inline-block;
+    min-height: 1.5em;
+    color: var(--gradient-start);
+    /* Tagline accent color */
+  }
 
-    #animated-tagline {
-      display: inline-block;
-      min-height: 1.5em;
-      color: var(--gradient-start);
-      /* Tagline accent color */
-    }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
 
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
+  ::-webkit-scrollbar-track {
+    background: var(--primary-bg);
+  }
 
-    ::-webkit-scrollbar-track {
-      background: var(--primary-bg);
-    }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--gradient-start), var(--gradient-end));
+    border-radius: 10px;
+  }
 
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, var(--gradient-start), var(--gradient-end));
-      border-radius: 10px;
-    }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--gradient-end), var(--gradient-start));
+  }
 
-    ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(180deg, var(--gradient-end), var(--gradient-start));
-    }
+  /* Navigation Styles */
+  .navbar {
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
 
-    /* Navigation Styles */
-    .navbar {
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
+  .nav-link {
+    position: relative;
+    color: var(--secondary-text);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    text-decoration: none;
+  }
 
-    .nav-link {
-      position: relative;
-      color: var(--secondary-text);
-      font-weight: 500;
-      transition: color 0.3s ease;
-      text-decoration: none;
-    }
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--accent-color);
+  }
 
-    .nav-link:hover,
-    .nav-link.active {
-      color: var(--accent-color);
-    }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+  }
 
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -4px;
-      left: 0;
-      background-color: var(--accent-color);
-      transition: width 0.3s ease;
-    }
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
 
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 100%;
-    }
+  /* Mobile Menu */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--primary-bg);
+    z-index: 49;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-    /* Mobile Menu */
-    .mobile-menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background-color: var(--primary-bg);
-      z-index: 49;
-      transform: translateX(100%);
-      transition: transform 0.3s ease-in-out;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+  .mobile-menu.active {
+    transform: translateX(0);
+  }
 
-    .mobile-menu.active {
-      transform: translateX(0);
-    }
+  .mobile-menu a {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    color: var(--primary-text);
+    text-decoration: none;
+  }
 
-    .mobile-menu a {
-      font-size: 1.5rem;
-      margin: 1rem 0;
-      color: var(--primary-text);
-      text-decoration: none;
-    }
+  #home {
+    background-image: url('image.png');
+    background-size: cover;
+    background-position: center top;
+    /* Changed to center top */
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
 
-    #home {
-      background-image: url('image.png');
-      background-size: cover;
-      background-position: center top;
-      /* Changed to center top */
-      background-repeat: no-repeat;
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+  #home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 26, 46, 0.7);
+    /* Dark overlay */
+    z-index: -1;
+  }
+
+  .gold-mode #home::before {
+    /* Changed from blush-mode */
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Gold mode overlay */
+  }
+
+  /* Add a fading effect at the bottom of the home section */
+  #home::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    /* Adjust height as needed for the fade */
+    background: linear-gradient(to top, var(--primary-bg), transparent);
+    z-index: 2;
+    /* Ensure it's above the image but below content */
+    pointer-events: none;
+    /* Allows clicks to pass through */
+  }
+
+  #home>.container {
+    position: relative;
+    z-index: 10;
+  }
+
+  section {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--primary-bg);
+    transition: background-color 0.5s ease;
+  }
+
+  section:nth-of-type(even) {
+    /* Alternate section background */
+    background-color: var(--secondary-bg);
+  }
+
+  .gold-mode section:nth-of-type(even) {
+    /* Changed from blush-mode */
+    background-color: var(--secondary-bg);
+  }
+
+  @media (min-width: 768px) {
+    section {
       padding-top: 5rem;
       padding-bottom: 5rem;
     }
+  }
 
-    #home::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(26, 26, 46, 0.7);
-      /* Dark overlay */
-      z-index: -1;
-    }
+  .elaborate-btn {
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    color: var(--primary-bg);
+    /* Text adapts to background */
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px var(--shadow-color-light);
+    transition: all 0.2s ease-in-out;
+  }
 
-    .gold-mode #home::before {
-      /* Changed from blush-mode */
-      background-color: rgba(0, 0, 0, 0.7);
-      /* Gold mode overlay */
-    }
+  .elaborate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px var(--shadow-color-light);
+    background: linear-gradient(90deg, var(--gradient-end), var(--gradient-start));
+  }
 
-    /* Add a fading effect at the bottom of the home section */
-    #home::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      /* Adjust height as needed for the fade */
-      background: linear-gradient(to top, var(--primary-bg), transparent);
-      z-index: 2;
-      /* Ensure it's above the image but below content */
-      pointer-events: none;
-      /* Allows clicks to pass through */
-    }
+  /* Education Roadmap Specific Styles */
+  .roadmap-container {
+    position: relative;
+    padding-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    #home>.container {
-      position: relative;
-      z-index: 10;
-    }
+  .roadmap-line {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+    /* Line uses accent gradient */
+    border-radius: 1px;
+  }
 
-    section {
-      padding-top: 6rem;
-      padding-bottom: 6rem;
-      width: 100%;
-      box-sizing: border-box;
-      background-color: var(--primary-bg);
-      transition: background-color 0.5s ease;
-    }
+  .roadmap-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 2.5rem;
+    width: 100%;
+  }
 
-    section:nth-of-type(even) {
-      /* Alternate section background */
-      background-color: var(--secondary-bg);
-    }
+  .roadmap-item:last-child {
+    margin-bottom: 0;
+  }
 
-    .gold-mode section:nth-of-type(even) {
-      /* Changed from blush-mode */
-      background-color: var(--secondary-bg);
-    }
+  .roadmap-circle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--gradient-start);
+    /* Use start of gradient for circle */
+    border: 2px solid var(--gradient-end);
+    /* Use end of gradient for border */
+    border-radius: 50%;
+    z-index: 10;
+    box-shadow: 0 0 10px var(--shadow-color-light);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--primary-bg);
+    /* Circle text adapts to primary background */
+    transform: translateY(-50%);
+  }
 
-    @media (min-width: 768px) {
-      section {
-        padding-top: 5rem;
-        padding-bottom: 5rem;
-      }
-    }
+  .roadmap-item:hover .roadmap-circle {
+    transform: translateY(-50%) scale(1.2);
+    box-shadow: 0 0 15px var(--shadow-color-light), 0 0 25px var(--shadow-color-light);
+  }
 
-    .elaborate-btn {
-      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-      color: var(--primary-bg);
-      /* Text adapts to background */
-      font-weight: 600;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 8px var(--shadow-color-light);
-      transition: all 0.2s ease-in-out;
-    }
+  .roadmap-content {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--card-border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px var(--shadow-color-dark);
+    transition: all 0.3s ease;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+  }
 
-    .elaborate-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px var(--shadow-color-light);
-      background: linear-gradient(90deg, var(--gradient-end), var(--gradient-start));
-    }
+  .roadmap-content:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--shadow-color-light);
+  }
 
-    /* Education Roadmap Specific Styles */
+  /* Desktop adjustments for Education Roadmap (single column) */
+  @media (min-width: 768px) {
     .roadmap-container {
-      position: relative;
-      padding-bottom: 1rem;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 900px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
+      padding-left: 0;
     }
 
     .roadmap-line {
-      position: absolute;
-      left: 1rem;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
-      /* Line uses accent gradient */
-      border-radius: 1px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .roadmap-item {
-      position: relative;
-      margin-bottom: 3rem;
-      padding-left: 2.5rem;
       width: 100%;
+      max-width: 600px;
+      padding-left: 0;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .roadmap-item:last-child {
       margin-bottom: 0;
     }
 
-    .roadmap-circle {
+    .roadmap-item .roadmap-circle {
       position: absolute;
-      left: 0;
-      top: 0;
-      width: 2rem;
-      height: 2rem;
-      background-color: var(--gradient-start);
-      /* Use start of gradient for circle */
-      border: 2px solid var(--gradient-end);
-      /* Use end of gradient for border */
-      border-radius: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      margin-top: 0;
       z-index: 10;
-      box-shadow: 0 0 10px var(--shadow-color-light);
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      font-weight: bold;
-      color: var(--primary-bg);
-      /* Circle text adapts to primary background */
-      transform: translateY(-50%);
-    }
-
-    .roadmap-item:hover .roadmap-circle {
-      transform: translateY(-50%) scale(1.2);
-      box-shadow: 0 0 15px var(--shadow-color-light), 0 0 25px var(--shadow-color-light);
     }
 
     .roadmap-content {
-      background-color: var(--secondary-bg);
-      border: 1px solid var(--card-border-color);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      box-shadow: 0 4px 15px var(--shadow-color-dark);
-      transition: all 0.3s ease;
-      position: relative;
-      width: 100%;
-      box-sizing: border-box;
-      text-align: left;
-    }
-
-    .roadmap-content:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px var(--shadow-color-light);
-    }
-
-    /* Desktop adjustments for Education Roadmap (single column) */
-    @media (min-width: 768px) {
-      .roadmap-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-left: 0;
-      }
-
-      .roadmap-line {
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      .roadmap-item {
-        width: 100%;
-        max-width: 600px;
-        padding-left: 0;
-        margin-bottom: 3rem;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .roadmap-item:last-child {
-        margin-bottom: 0;
-      }
-
-      .roadmap-item .roadmap-circle {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        margin-top: 0;
-        z-index: 10;
-      }
-
-      .roadmap-content {
-        width: calc(100% - 4rem);
-        margin-left: 2rem;
-        margin-right: 0;
-        text-align: left;
-        flex-grow: 1;
-      }
-
-      .roadmap-content::before {
-        left: -15px;
-        border-width: 15px 15px 15px 0;
-        border-color: transparent var(--secondary-bg) transparent transparent;
-        /* Arrow color matches card background */
-        right: auto;
-      }
-    }
-
-    /* Keyframes for the ring animation */
-    @keyframes rotateCircle1 {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes rotateCircle2 {
-      from {
-        transform: rotate(360deg);
-      }
-
-      to {
-        transform: rotate(0deg);
-      }
-    }
-
-    @keyframes pulseOpacity {
-      0% {
-        opacity: 0.7;
-      }
-
-      50% {
-        opacity: 0.9;
-      }
-
-      100% {
-        opacity: 0.7;
-      }
-    }
-
-    .animated-outer-ring {
-      animation: rotateCircle1 10s linear infinite;
-      transform-origin: center center;
-    }
-
-    /* Mode Switch Button Styling */
-    #modeSwitchBtn {
-      position: fixed;
-      bottom: 6rem;
-      /* Above back to top button */
-      right: 1.5rem;
-      background-color: var(--gradient-start);
-      /* Use gradient start for button */
-      color: var(--primary-bg);
-      /* Text adapts to primary background */
-      border-radius: 0.5rem;
-      /* Rectangular button with rounded corners */
-      padding: 0.75rem;
-      /* Reduced padding as text is removed */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px var(--shadow-color-dark);
-      cursor: pointer;
-      z-index: 1000;
-      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-      font-size: 1.5rem;
-      /* Icon size */
-      width: 48px;
-      /* Fixed width for icon-only button */
-      height: 48px;
-      /* Fixed height for icon-only button */
-      min-width: auto;
-      /* Remove min-width */
-    }
-
-    #modeSwitchBtn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 15px var(--shadow-color-light);
-    }
-
-    #modeSwitchBtn i {
+      width: calc(100% - 4rem);
+      margin-left: 2rem;
       margin-right: 0;
-      /* No margin as text is removed */
+      text-align: left;
+      flex-grow: 1;
     }
 
-    /* Heart Effect CSS */
-    .heart-effect {
-      position: fixed;
-      /* Ensures it's always relative to the viewport and on top */
-      pointer-events: none;
-      /* Allows clicks/touches to pass through */
-      transform: translate(-50%, -50%);
-      /* Center the heart on the cursor/touch point */
-      font-size: 1.5rem;
-      /* Size of the heart */
-      color: var(--heart-color);
-      /* Heart color, now a variable */
+    .roadmap-content::before {
+      left: -15px;
+      border-width: 15px 15px 15px 0;
+      border-color: transparent var(--secondary-bg) transparent transparent;
+      /* Arrow color matches card background */
+      right: auto;
+    }
+  }
+
+  /* Keyframes for the ring animation */
+  @keyframes rotateCircle1 {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes rotateCircle2 {
+    from {
+      transform: rotate(360deg);
+    }
+
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes pulseOpacity {
+    0% {
+      opacity: 0.7;
+    }
+
+    50% {
+      opacity: 0.9;
+    }
+
+    100% {
+      opacity: 0.7;
+    }
+  }
+
+  .animated-outer-ring {
+    animation: rotateCircle1 10s linear infinite;
+    transform-origin: center center;
+  }
+
+  /* Mode Switch Button Styling */
+  #modeSwitchBtn {
+    position: fixed;
+    bottom: 6rem;
+    /* Above back to top button */
+    right: 1.5rem;
+    background-color: var(--gradient-start);
+    /* Use gradient start for button */
+    color: var(--primary-bg);
+    /* Text adapts to primary background */
+    border-radius: 0.5rem;
+    /* Rectangular button with rounded corners */
+    padding: 0.75rem;
+    /* Reduced padding as text is removed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px var(--shadow-color-dark);
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    font-size: 1.5rem;
+    /* Icon size */
+    width: 48px;
+    /* Fixed width for icon-only button */
+    height: 48px;
+    /* Fixed height for icon-only button */
+    min-width: auto;
+    /* Remove min-width */
+  }
+
+  #modeSwitchBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px var(--shadow-color-light);
+  }
+
+  #modeSwitchBtn i {
+    margin-right: 0;
+    /* No margin as text is removed */
+  }
+
+  /* Heart Effect CSS */
+  .heart-effect {
+    position: fixed;
+    /* Ensures it's always relative to the viewport and on top */
+    pointer-events: none;
+    /* Allows clicks/touches to pass through */
+    transform: translate(-50%, -50%);
+    /* Center the heart on the cursor/touch point */
+    font-size: 1.5rem;
+    /* Size of the heart */
+    color: var(--heart-color);
+    /* Heart color, now a variable */
+    opacity: 0;
+    /* Start invisible */
+    animation: heartFadeAndMove 1s ease-out forwards;
+    /* Animation duration and fill mode */
+    z-index: 9999;
+    /* Ensure hearts are on top of everything */
+  }
+
+  @keyframes heartFadeAndMove {
+    0% {
       opacity: 0;
-      /* Start invisible */
-      animation: heartFadeAndMove 1s ease-out forwards;
-      /* Animation duration and fill mode */
-      z-index: 9999;
-      /* Ensure hearts are on top of everything */
+      transform: translate(-50%, -50%) scale(0.5);
     }
 
-    @keyframes heartFadeAndMove {
-      0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.5);
-      }
-
-      20% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.2);
-      }
-
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -150%) scale(0.8);
-        /* Moves up and fades out */
-      }
+    20% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.2);
     }
 
-    /* Candle flame animation */
-    @keyframes flameGlow {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-      }
-
-      50% {
-        transform: scale(1.05);
-        opacity: 0.9;
-      }
-
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -150%) scale(0.8);
+      /* Moves up and fades out */
     }
+  }
 
-    .candle-flame,
-    .candle-flame-inner {
-      animation: flameGlow 1.5s ease-in-out infinite alternate;
-      transform-origin: center bottom;
-    }
-
-    /* About Me Profile Image and Animated Background */
-    .profile-image-container {
-      position: relative;
-      max-width: 300px;
-      width: 80vw;
-      /* Responsive width */
-      height: 300px;
-      margin: 0 auto 2rem auto;
-      /* Center horizontally and add bottom margin */
-      border-radius: 50%;
-      overflow: hidden;
-      /* Hide parts of SVG outside the circle */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-      flex-shrink: 0;
-      /* Prevent image from shrinking */
-    }
-
-    .profile-image-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
-      /* Changed to top */
-      border-radius: 50%;
-      position: relative;
-      z-index: 10;
-      transform: scale(0);
-      /* Start hidden for pop-up effect */
-      transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-      /* Pop-up animation */
-    }
-
-    .profile-animated-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 5;
-    }
-
-    .profile-animated-bg .circle1 {
-      animation: rotateCircle1 20s linear infinite;
-      transform-origin: center center;
-      fill: var(--gradient-start);
-      opacity: 0.6;
-    }
-
-    .profile-animated-bg .circle2 {
-      animation: rotateCircle2 15s linear infinite;
-      transform-origin: center center;
-      fill: var(--gradient-end);
-      opacity: 0.5;
-    }
-
-    .profile-animated-bg .circle3 {
-      animation: pulseOpacity 3s ease-in-out infinite alternate;
-      fill: var(--accent-color);
-      opacity: 0.8;
-    }
-
-    /* Adjust about section layout for desktop */
-    #about .container .about-content-wrapper {
-      /* New wrapper div */
-      display: flex;
-      flex-direction: column;
-      /* Always stack vertically */
-      align-items: center;
-      /* Center items horizontally */
-    }
-
-    /* When AOS triggers, make the image pop up */
-    .aos-animate .profile-image-container img {
+  /* Candle flame animation */
+  @keyframes flameGlow {
+    0% {
       transform: scale(1);
-    }
-
-    @media (min-width: 768px) {
-      #about .container .about-content-wrapper {
-        flex-direction: column;
-        /* Keep as column on desktop */
-        align-items: center;
-        /* Align items to the top */
-      }
-
-      #about .about-text-content {
-        /* Bio text content */
-        width: 100%;
-        /* Take full width */
-        margin-left: 0;
-        /* Remove previous left/right margins */
-        margin-right: 0;
-      }
-
-      #about .about-cards-content {
-        /* Age, Motto, Languages cards */
-        width: 100%;
-        /* Take full width */
-        margin-left: 0;
-        /* Remove previous left/right margins */
-        margin-right: 0;
-      }
-
-      #about .profile-image-container {
-        margin-bottom: 2rem;
-        /* Add space below the image */
-      }
-    }
-
-    /* Experience Timeline Styles */
-    .timeline-container {
-      position: relative;
-      max-width: 900px;
-      margin: 0 auto;
-      padding-left: 20px;
-    }
-
-    .timeline-container::after {
-      content: '';
-      position: absolute;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
-      top: 0;
-      bottom: 0;
-      left: 10px;
-      margin-left: -3px;
-    }
-
-    .timeline-item {
-      padding: 10px 0 20px 30px;
-      position: relative;
-      background-color: inherit;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      left: 3px;
-      background-color: var(--gradient-end);
-      border: 2px solid var(--gradient-start);
-      top: 15px;
-      border-radius: 50%;
-      z-index: 1;
-    }
-
-    .timeline-content {
-      padding: 20px 30px;
-      background-color: var(--secondary-bg);
-      position: relative;
-      border-radius: 0.75rem;
-      box-shadow: 0 4px 15px var(--shadow-color-dark);
-      border: 1px solid var(--card-border-color);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .timeline-content:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px var(--shadow-color-light);
-    }
-
-    /* Modal Styles */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    .modal.show {
-      visibility: visible;
       opacity: 1;
     }
 
-    .modal-content {
-      background-color: var(--secondary-bg);
-      padding: 2.5rem;
-      border-radius: 0.75rem;
-      width: 90%;
-      max-width: 800px;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .close-button {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      font-size: 2rem;
-      color: var(--primary-text);
-      cursor: pointer;
-      transition: color 0.3s ease;
-    }
-
-    .close-button:hover {
-      color: var(--gradient-start);
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-
-    .gallery img {
-      width: 100%;
-      height: auto;
-      border-radius: 0.5rem;
-      transition: transform 0.2s ease;
-      object-fit: cover;
-    }
-
-    .gallery img:hover {
+    50% {
       transform: scale(1.05);
+      opacity: 0.9;
     }
 
-    .links-list {
-      display: flex;
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .candle-flame,
+  .candle-flame-inner {
+    animation: flameGlow 1.5s ease-in-out infinite alternate;
+    transform-origin: center bottom;
+  }
+
+  /* About Me Profile Image and Animated Background */
+  .profile-image-container {
+    position: relative;
+    max-width: 300px;
+    width: 80vw;
+    /* Responsive width */
+    height: 300px;
+    margin: 0 auto 2rem auto;
+    /* Center horizontally and add bottom margin */
+    border-radius: 50%;
+    overflow: hidden;
+    /* Hide parts of SVG outside the circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0;
+    /* Prevent image from shrinking */
+  }
+
+  .profile-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    /* Changed to top */
+    border-radius: 50%;
+    position: relative;
+    z-index: 10;
+    transform: scale(0);
+    /* Start hidden for pop-up effect */
+    transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    /* Pop-up animation */
+  }
+
+  .profile-animated-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+  }
+
+  .profile-animated-bg .circle1 {
+    animation: rotateCircle1 20s linear infinite;
+    transform-origin: center center;
+    fill: var(--gradient-start);
+    opacity: 0.6;
+  }
+
+  .profile-animated-bg .circle2 {
+    animation: rotateCircle2 15s linear infinite;
+    transform-origin: center center;
+    fill: var(--gradient-end);
+    opacity: 0.5;
+  }
+
+  .profile-animated-bg .circle3 {
+    animation: pulseOpacity 3s ease-in-out infinite alternate;
+    fill: var(--accent-color);
+    opacity: 0.8;
+  }
+
+  /* Adjust about section layout for desktop */
+  #about .container .about-content-wrapper {
+    /* New wrapper div */
+    display: flex;
+    flex-direction: column;
+    /* Always stack vertically */
+    align-items: center;
+    /* Center items horizontally */
+  }
+
+  /* When AOS triggers, make the image pop up */
+  .aos-animate .profile-image-container img {
+    transform: scale(1);
+  }
+
+  @media (min-width: 768px) {
+    #about .container .about-content-wrapper {
       flex-direction: column;
-      gap: 1rem;
+      /* Keep as column on desktop */
+      align-items: center;
+      /* Align items to the top */
     }
 
-    .modal-button {
-      display: block;
-      padding: 0.75rem 1.25rem;
-      background-color: var(--primary-bg);
-      border: 1px solid var(--card-border-color);
-      border-radius: 0.5rem;
-      transition: all 0.2s ease;
-      text-align: center;
-      color: var(--primary-text);
-      cursor: pointer;
+    #about .about-text-content {
+      /* Bio text content */
+      width: 100%;
+      /* Take full width */
+      margin-left: 0;
+      /* Remove previous left/right margins */
+      margin-right: 0;
     }
 
-    .modal-button:hover {
-      transform: translateY(-2px);
-      background-color: var(--gradient-start);
-      color: var(--primary-bg);
-      border-color: var(--gradient-start);
+    #about .about-cards-content {
+      /* Age, Motto, Languages cards */
+      width: 100%;
+      /* Take full width */
+      margin-left: 0;
+      /* Remove previous left/right margins */
+      margin-right: 0;
     }
 
-    .message-card {
-      background-color: var(--secondary-bg);
-      padding: 2.5rem;
-      border-radius: 0.75rem;
-      box-shadow: 0 4px 15px var(--shadow-color-dark);
-      border: 1px solid var(--card-border-color);
-      max-width: 500px;
-      text-align: center;
-      animation: fadeInScale 0.3s ease-out forwards;
+    #about .profile-image-container {
+      margin-bottom: 2rem;
+      /* Add space below the image */
+    }
+  }
+
+  /* Experience Timeline Styles */
+  .timeline-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 20px;
+  }
+
+  .timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    margin-left: -3px;
+  }
+
+  .timeline-item {
+    padding: 10px 0 20px 30px;
+    position: relative;
+    background-color: inherit;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    left: 3px;
+    background-color: var(--gradient-end);
+    border: 2px solid var(--gradient-start);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .timeline-content {
+    padding: 20px 30px;
+    background-color: var(--secondary-bg);
+    position: relative;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 15px var(--shadow-color-dark);
+    border: 1px solid var(--card-border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-color-light);
+  }
+
+  /* Modal Styles */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .modal.show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .modal-content {
+    background-color: var(--secondary-bg);
+    padding: 2.5rem;
+    border-radius: 0.75rem;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: var(--primary-text);
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .close-button:hover {
+    color: var(--gradient-start);
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease;
+    object-fit: cover;
+  }
+
+  .gallery img:hover {
+    transform: scale(1.05);
+  }
+
+  .links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .modal-button {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    background-color: var(--primary-bg);
+    border: 1px solid var(--card-border-color);
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    text-align: center;
+    color: var(--primary-text);
+    cursor: pointer;
+  }
+
+  .modal-button:hover {
+    transform: translateY(-2px);
+    background-color: var(--gradient-start);
+    color: var(--primary-bg);
+    border-color: var(--gradient-start);
+  }
+
+  .message-card {
+    background-color: var(--secondary-bg);
+    padding: 2.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 15px var(--shadow-color-dark);
+    border: 1px solid var(--card-border-color);
+    max-width: 500px;
+    text-align: center;
+    animation: fadeInScale 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
     }
 
-    @keyframes fadeInScale {
-      from {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    to {
+      opacity: 1;
+      transform: scale(1);
     }
-  </style>
+  }
+</style>
 </head>
 
 <body class="bg-dark-bg text-gray-200">
