@@ -14,7 +14,7 @@ export async function POST(req: Request) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
         const chat = model.startChat({
             history: [
@@ -51,7 +51,15 @@ export async function POST(req: Request) {
         let errorMessage = "My connection to the cloud just tripped over a wire. 🔌";
 
         if (error.message && (error.message.includes("429") || error.message.includes("Quota") || error.message.includes("quota"))) {
-            errorMessage = "Whoa, slow down! 🛑 My brain is overheating (API Rate Limit). Give me a minute to cool off. 🧊";
+            console.log("⚠️ Rate Limit Hit. Switching to Mock Response.");
+            // Fallback: Return a local sassy response so the UX doesn't break.
+            const mocks = [
+                "My cloud brain is on a coffee break (Rate Limit). But yes, I'm listening. ☕",
+                "Google thinks I'm too chatty (Quota Exceeded). Let's pretend I said something smart.",
+                "I'm temporarily offline to save humanity from my brilliance. (Try again in 1 min).",
+                "Error 429: Too much sass for one API key. 💅"
+            ];
+            errorMessage = mocks[Math.floor(Math.random() * mocks.length)];
         }
 
         return NextResponse.json({
