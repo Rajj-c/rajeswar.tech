@@ -14,7 +14,7 @@ export async function POST(req: Request) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
         const chat = model.startChat({
             history: [
@@ -47,9 +47,16 @@ export async function POST(req: Request) {
 
     } catch (error: any) {
         console.error("Chat Error:", error);
-        // Fallback: Pretend we just don't know, so user can email Raj.
+
+        let errorMessage = "My connection to the cloud just tripped over a wire. 🔌";
+
+        if (error.message && (error.message.includes("429") || error.message.includes("Quota") || error.message.includes("quota"))) {
+            errorMessage = "Whoa, slow down! 🛑 My brain is overheating (API Rate Limit). Give me a minute to cool off. 🧊";
+        }
+
         return NextResponse.json({
-            reply: "My connection to the cloud just tripped over a wire. 🔌 I can't answer that right now. Want to ask Raj directly? (Or just try again later)."
+            reply: errorMessage,
+            error_details: error.message || String(error)
         });
     }
 }

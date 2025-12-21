@@ -53,7 +53,8 @@ export default function Chatbot() {
 
             const data = await res.json();
 
-            if (data.reply.includes("I_DONT_KNOW_EXACTLY")) {
+
+            if (data.reply && data.reply.includes("I_DONT_KNOW_EXACTLY")) {
                 setPendingQuestion(userMessage.text);
                 setShowEmailPrompt(true);
                 setMessages((prev) => [

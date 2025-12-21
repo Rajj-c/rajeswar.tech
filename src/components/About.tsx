@@ -6,45 +6,8 @@ import { motion, useMotionValue, useSpring, useTransform, useInView } from 'fram
 import { Calendar, MapPin, Download } from 'lucide-react';
 import ResumeModal from './ResumeModal';
 
-const chars = "-_~`!@#$%^&*()+=[]{}|;:,.<>?/";
+import { TextDecrypt } from './ui/TextDecrypt';
 
-// Matrix Text Decrypt Component
-const TextDecrypt = ({ text }: { text: string }) => {
-    const [displayText, setDisplayText] = useState("");
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: false });
-
-    useEffect(() => {
-        let interval: NodeJS.Timeout;
-
-        if (isInView) {
-            let iteration = 0;
-            const animate = () => {
-                interval = setInterval(() => {
-                    setDisplayText(prev =>
-                        text.split("").map((letter, index) => {
-                            if (index < iteration) {
-                                return text[index];
-                            }
-                            return chars[Math.floor(Math.random() * chars.length)];
-                        }).join("")
-                    );
-
-                    if (iteration >= text.length) {
-                        clearInterval(interval);
-                    }
-
-                    iteration += 1 / 3;
-                }, 30);
-            };
-            animate();
-        }
-
-        return () => clearInterval(interval);
-    }, [text, isInView]);
-
-    return <span ref={ref}>{displayText}</span>;
-}
 
 // 3D Tilt Card Component
 function TiltCard({ children }: { children: React.ReactNode }) {
