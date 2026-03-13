@@ -233,7 +233,7 @@ function Navbar() {
     };
     const confirmResume = ()=>{
         setShowResumeModal(false);
-        window.open("https://drive.google.com/file/d/1NidOifn_ppMyBdD1XQuCgpWBoQHQA6ML/view?usp=drive_link", "_blank");
+        window.open("https://drive.google.com/file/d/171r1Xac3pCxE1UbIiep9yhefYsGzC0Va/view?usp=sharing", "_blank");
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
@@ -1039,7 +1039,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_mod
 var __TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$value$2f$use$2d$transform$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rajeswar.tech/node_modules/framer-motion/dist/es/value/use-transform.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$calendar$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Calendar$3e$__ = __turbopack_context__.i("[project]/rajeswar.tech/node_modules/lucide-react/dist/esm/icons/calendar.js [app-ssr] (ecmascript) <export default as Calendar>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$map$2d$pin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MapPin$3e$__ = __turbopack_context__.i("[project]/rajeswar.tech/node_modules/lucide-react/dist/esm/icons/map-pin.js [app-ssr] (ecmascript) <export default as MapPin>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$download$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Download$3e$__ = __turbopack_context__.i("[project]/rajeswar.tech/node_modules/lucide-react/dist/esm/icons/download.js [app-ssr] (ecmascript) <export default as Download>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$right$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowRight$3e$__ = __turbopack_context__.i("[project]/rajeswar.tech/node_modules/lucide-react/dist/esm/icons/arrow-right.js [app-ssr] (ecmascript) <export default as ArrowRight>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$src$2f$components$2f$ResumeModal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rajeswar.tech/src/components/ResumeModal.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$src$2f$components$2f$ui$2f$TextDecrypt$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rajeswar.tech/src/components/ui/TextDecrypt.tsx [app-ssr] (ecmascript)");
 'use client';
@@ -1113,7 +1113,7 @@ function About() {
     };
     const confirmResume = ()=>{
         setShowResumeModal(false);
-        window.open("https://drive.google.com/file/d/1NidOifn_ppMyBdD1XQuCgpWBoQHQA6ML/view?usp=drive_link", "_blank");
+        window.open("https://drive.google.com/file/d/171r1Xac3pCxE1UbIiep9yhefYsGzC0Va/view?usp=sharing", "_blank");
     };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const birthDate = new Date('2005-04-23T12:30:00');
@@ -1397,8 +1397,8 @@ function About() {
                                                     onClick: handleResumeClick,
                                                     className: "btn-primary inline-flex items-center gap-2 px-8 py-3 text-sm font-bold uppercase tracking-widest hover:scale-105 transition-transform",
                                                     children: [
-                                                        "Download CV ",
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$download$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Download$3e$__["Download"], {
+                                                        "View Resume ",
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$rajeswar$2e$tech$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$right$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowRight$3e$__["ArrowRight"], {
                                                             size: 18
                                                         }, void 0, false, {
                                                             fileName: "[project]/rajeswar.tech/src/components/About.tsx",

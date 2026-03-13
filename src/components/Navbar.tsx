@@ -34,7 +34,7 @@ export default function Navbar() {
 
     const confirmResume = () => {
         setShowResumeModal(false);
-        window.open("https://drive.google.com/file/d/1NidOifn_ppMyBdD1XQuCgpWBoQHQA6ML/view?usp=drive_link", "_blank");
+        window.open("https://drive.google.com/file/d/171r1Xac3pCxE1UbIiep9yhefYsGzC0Va/view?usp=sharing", "_blank");
     };
 
     return (

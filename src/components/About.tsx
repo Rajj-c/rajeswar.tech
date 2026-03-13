@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
-import { Calendar, MapPin, Download } from 'lucide-react';
+import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 import ResumeModal from './ResumeModal';
 
 import { TextDecrypt } from './ui/TextDecrypt';
@@ -69,7 +69,7 @@ export default function About() {
 
     const confirmResume = () => {
         setShowResumeModal(false);
-        window.open("https://drive.google.com/file/d/1NidOifn_ppMyBdD1XQuCgpWBoQHQA6ML/view?usp=drive_link", "_blank");
+        window.open("https://drive.google.com/file/d/171r1Xac3pCxE1UbIiep9yhefYsGzC0Va/view?usp=sharing", "_blank");
     };
 
     useEffect(() => {
@@ -192,7 +192,7 @@ export default function About() {
                                     onClick={handleResumeClick}
                                     className="btn-primary inline-flex items-center gap-2 px-8 py-3 text-sm font-bold uppercase tracking-widest hover:scale-105 transition-transform"
                                 >
-                                    Download CV <Download size={18} />
+                                    View Resume <ArrowRight size={18} />
                                 </button>
                             </div>
                         </motion.div>
