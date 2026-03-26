@@ -15782,3 +15782,5 @@ It can also happen if the client has a browser extension installed which messes 
 [02:48:07.302] Server  LOG      ✓ Compiled in 42ms
 [02:48:09.386] Server  LOG      ✓ Compiled in 26ms
 [02:51:33.273] Browser WARN    'oklab(0.795 0.012684 0.183562 / 0.1)' is not an animatable color. Use the equivalent color code instead.. For more information and steps for solving, visit https://motion.dev/troubleshooting/color-not-animatable
+[03:17:09.820] Server  LOG      ✓ Compiled in 164ms
+[03:29:40.772] Server  LOG      ✓ Compiled in 135ms

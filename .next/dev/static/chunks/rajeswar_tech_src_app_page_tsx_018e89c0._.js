@@ -1,7 +1,7 @@
 (globalThis.TURBOPACK_CHUNK_LISTS || (globalThis.TURBOPACK_CHUNK_LISTS = [])).push({
     script: typeof document === "object" ? document.currentScript : undefined,
     chunks: [
-  "static/chunks/rajeswar_tech_src_components_ceb322a7._.js",
+  "static/chunks/rajeswar_tech_src_components_9984e31e._.js",
   "static/chunks/8e36e_next_7024b1d9._.js",
   "static/chunks/8e36e_motion-dom_dist_es_44817f31._.js",
   "static/chunks/8e36e_framer-motion_dist_es_ad2fae9f._.js",
@@ -12,8 +12,8 @@
   "static/chunks/8e36e_@react-three_fiber_dist_4e1a4a77._.js",
   "static/chunks/8e36e_react-icons_fa_index_mjs_8584340b._.js",
   "static/chunks/8e36e_react-icons_lib_d7317eee._.js",
-  "static/chunks/8e36e_af9f913e._.js",
-  "static/chunks/rajeswar_tech_src_components_ui_227208b8._.css"
+  "static/chunks/8e36e_a59a46a4._.js",
+  "static/chunks/rajeswar_tech_src_components_ui_06cdcf17._.css"
 ],
     source: "dynamic"
 });

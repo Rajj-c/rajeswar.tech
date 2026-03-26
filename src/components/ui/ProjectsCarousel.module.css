@@ -1,0 +1,77 @@
+.wrapper {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible; /* Let it breathe */
+}
+
+.inner {
+  --w: 320px;
+  --h: 420px;
+  --translateZ: 350px;
+  --rotateX: -10deg;
+  --perspective: 1500px;
+
+  position: absolute;
+  width: var(--w);
+  height: var(--h);
+  top: 15%;
+  left: calc(50% - (var(--w) / 2));
+  z-index: 2;
+  transform-style: preserve-3d;
+  transform: perspective(var(--perspective)) rotateX(var(--rotateX));
+  animation: rotating 25s linear infinite;
+}
+
+/* Pause spinning when hovering over the carousel so user can click links */
+.inner:hover {
+  animation-play-state: paused;
+}
+
+@keyframes rotating {
+  from {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0deg);
+  }
+  to {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(360deg);
+  }
+}
+
+.card {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  inset: 0;
+  background: rgba(15, 15, 15, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  /* Place each card in the circle based on its index (1 to quantity) */
+  transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  border-color: rgba(255, 215, 0, 0.5); /* Accent color glow */
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+}
+
+/* Make it responsive for mobile */
+@media (max-width: 768px) {
+  .wrapper {
+    height: 500px;
+  }
+  .inner {
+    --w: 260px;
+    --h: 380px;
+    --translateZ: min(280px, 40vw);
+    --rotateX: -5deg;
+    top: 5%;
+  }
+}

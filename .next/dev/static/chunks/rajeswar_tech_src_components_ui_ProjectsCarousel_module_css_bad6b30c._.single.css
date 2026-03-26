@@ -1,0 +1,77 @@
+/* [project]/rajeswar.tech/src/components/ui/ProjectsCarousel.module.css [app-client] (css) */
+.ProjectsCarousel-module__K_HA-W__wrapper {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  position: relative;
+  overflow: visible;
+}
+
+.ProjectsCarousel-module__K_HA-W__inner {
+  --w: 320px;
+  --h: 420px;
+  --translateZ: 350px;
+  --rotateX: -10deg;
+  --perspective: 1500px;
+  width: var(--w);
+  height: var(--h);
+  top: 15%;
+  left: calc(50% - (var(--w) / 2));
+  z-index: 2;
+  transform-style: preserve-3d;
+  transform: perspective(var(--perspective)) rotateX(var(--rotateX));
+  animation: 25s linear infinite ProjectsCarousel-module__K_HA-W__rotating;
+  position: absolute;
+}
+
+.ProjectsCarousel-module__K_HA-W__inner:hover {
+  animation-play-state: paused;
+}
+
+@keyframes ProjectsCarousel-module__K_HA-W__rotating {
+  from {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0deg);
+  }
+
+  to {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(360deg);
+  }
+}
+
+.ProjectsCarousel-module__K_HA-W__card {
+  -webkit-backdrop-filter: blur(8px);
+  transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+  background: #0f0f0fcc;
+  border: 1px solid #ffffff1a;
+  border-radius: 20px;
+  flex-direction: column;
+  transition: border-color .3s, box-shadow .3s;
+  display: flex;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.ProjectsCarousel-module__K_HA-W__card:hover {
+  border-color: #ffd70080;
+  box-shadow: 0 0 30px #ffd70026;
+}
+
+@media (max-width: 768px) {
+  .ProjectsCarousel-module__K_HA-W__wrapper {
+    height: 500px;
+  }
+
+  .ProjectsCarousel-module__K_HA-W__inner {
+    --w: 260px;
+    --h: 380px;
+    --translateZ: min(280px, 40vw);
+    --rotateX: -5deg;
+    top: 5%;
+  }
+}
+
+/*# sourceMappingURL=rajeswar_tech_src_components_ui_ProjectsCarousel_module_css_bad6b30c._.single.css.map*/
