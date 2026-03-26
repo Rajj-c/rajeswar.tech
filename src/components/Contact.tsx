@@ -1,9 +1,23 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Twitter, Facebook, Instagram, Send } from 'lucide-react';
+import SocialGrid from './ui/SocialGrid';
+import btnStyles from './ui/SendButton.module.css';
+import { useState, useRef } from 'react';
 
 export default function Contact() {
+    const [isSending, setIsSending] = useState(false);
+    const formRef = useRef<HTMLFormElement>(null);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (isSending) return;
+        setIsSending(true);
+        // After animation plays (~2.5s), actually submit the form
+        setTimeout(() => {
+            formRef.current?.submit();
+        }, 2500);
+    };
     return (
         <section id="contact" className="py-24 bg-[var(--primary-bg)] relative overflow-hidden border-t border-white/5">
             <div className="absolute top-[20%] right-[10%] w-[500px] h-[500px] bg-purple-900/20 rounded-full blur-[120px] pointer-events-none"></div>
@@ -27,8 +41,15 @@ export default function Contact() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: false }}
                     >
-                        <form action="https://formspree.io/f/mldllgob" method="POST" className="bg-[var(--secondary-bg)]/50 backdrop-blur-sm border border-white/10 p-8 md:p-10 rounded-2xl shadow-2xl relative overflow-hidden group">
-                            {/* Subtle gradient border effect via pseudo element? simplified for now */}
+                        <form
+                            ref={formRef}
+                            action="https://api.web3forms.com/submit"
+                            method="POST"
+                            onSubmit={handleSubmit}
+                            className="bg-[var(--secondary-bg)]/50 backdrop-blur-sm border border-white/10 p-8 md:p-10 rounded-2xl shadow-2xl relative overflow-hidden group"
+                        >
+                            {/* Web3Forms Access Key */}
+                            <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_KEY || ""} />
 
                             <div className="space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -50,10 +71,60 @@ export default function Contact() {
                                         className="w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-[var(--accent-color)] text-white placeholder-gray-600 transition-all focus:bg-white/10 resize-none"></textarea>
                                 </div>
 
-                                <button type="submit" className="w-full btn-primary py-4 text-lg font-bold uppercase tracking-tight flex items-center justify-center gap-3 group/btn">
-                                    Send Message
-                                    <Send size={20} className="group-hover/btn:translate-x-1 transition-transform" />
-                                </button>
+                                {/* Animated Send Button */}
+                                <div className="flex justify-center pt-2">
+                                    <button
+                                        type="submit"
+                                        className={`${btnStyles.button} ${isSending ? btnStyles.sending : ''}`}
+                                        disabled={isSending}
+                                    >
+                                        <div className={btnStyles.mainBorder}>
+                                            <div className={btnStyles.main}>
+                                                <div className={btnStyles.innerBox}>
+                                                    <div className={btnStyles.innerDent}></div>
+                                                    <div className={btnStyles.contentRow}>
+
+                                                        {/* Phase 1: plane slides right → Phase 2: flies off with Message */}
+                                                        <div className={btnStyles.plane}>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#222" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                                            </svg>
+                                                        </div>
+
+                                                        {/* "Send" stays, then morphs to "Sent!" */}
+                                                        <div className={btnStyles.sendWrapper}>
+                                                            <span className={btnStyles.sendText}>Send</span>
+                                                            <span className={btnStyles.sentText}>Sent!</span>
+                                                        </div>
+
+                                                        {/* "Message" flies off with the plane */}
+                                                        <span className={btnStyles.messageText}>Message</span>
+                                                    </div>
+
+                                                    {/* Green checkmark appears after Sent! */}
+                                                    <div className={btnStyles.checkmark}>
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                                            <polyline points="20 6 9 17 4 12"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+
+                                {/* Follow-up message after send */}
+                                <p
+                                    className="text-center text-sm text-gray-400 mt-3 transition-all duration-700"
+                                    style={{
+                                        opacity: isSending ? 1 : 0,
+                                        transform: isSending ? 'translateY(0)' : 'translateY(8px)',
+                                        transitionDelay: isSending ? '1.6s' : '0s'
+                                    }}
+                                >
+                                    RAJ will get back to you soon! 👋
+                                </p>
                             </div>
                         </form>
                     </motion.div>
@@ -65,41 +136,8 @@ export default function Contact() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: false }}
                     >
-                        <div className="bg-[var(--secondary-bg)]/50 border border-white/10 p-8 rounded-2xl h-full flex flex-col justify-between">
-                            <div>
-                                <h3 className="text-2xl font-bold text-white mb-6">Contact Info</h3>
-                                <div className="space-y-8">
-                                    <div className="flex items-start gap-4">
-                                        <div className="p-3 bg-[var(--accent-color)] text-black rounded-lg">
-                                            <Mail size={24} />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm text-gray-400 font-medium">Email Me</p>
-                                            <a href="mailto:rajeshwarcn@gmail.com" className="text-white hover:text-[var(--accent-color)] font-medium text-lg transition-colors">rajeshwarcn@gmail.com</a>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-start gap-4">
-                                        <div className="p-3 bg-[var(--accent-color)] text-black rounded-lg">
-                                            <Linkedin size={24} />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm text-gray-400 font-medium">LinkedIn</p>
-                                            <a href="https://linkedin.com/in/rajeswarcharapalli" target="_blank" className="text-white hover:text-[var(--accent-color)] font-medium text-lg transition-colors">Connect Profile</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="mt-12">
-                                <p className="text-sm text-gray-400 mb-4 uppercase tracking-widest">Socials</p>
-                                <div className="flex gap-3">
-                                    <a href="https://linkedin.com/in/rajeswarcharapalli" target="_blank" className="p-3 bg-white/5 rounded-full text-white hover:bg-[#0077b5] hover:text-white transition-all transform hover:-translate-y-1"><Linkedin size={20} /></a>
-                                    <a href="https://x.com/Charapalli87056" target="_blank" className="p-3 bg-white/5 rounded-full text-white hover:bg-black hover:text-white transition-all transform hover:-translate-y-1"><Twitter size={20} /></a>
-                                    <a href="https://www.facebook.com/share/1FChJNUfjG/" target="_blank" className="p-3 bg-white/5 rounded-full text-white hover:bg-[#1877F2] hover:text-white transition-all transform hover:-translate-y-1"><Facebook size={20} /></a>
-                                    <a href="https://www.instagram.com/rajeswar_chowdary" target="_blank" className="p-3 bg-white/5 rounded-full text-white hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-red-500 hover:to-purple-500 transition-all transform hover:-translate-y-1"><Instagram size={20} /></a>
-                                </div>
-                            </div>
+                        <div className="bg-[var(--secondary-bg)]/50 border border-white/10 p-8 rounded-2xl h-full flex items-center justify-center min-h-[400px]">
+                            <SocialGrid />
                         </div>
                     </motion.div>
                 </div>

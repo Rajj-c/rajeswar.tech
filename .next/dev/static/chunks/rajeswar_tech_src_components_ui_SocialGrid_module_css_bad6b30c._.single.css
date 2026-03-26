@@ -1,0 +1,234 @@
+/* [project]/rajeswar.tech/src/components/ui/SocialGrid.module.css [app-client] (css) */
+.SocialGrid-module__s-oYkW__main_back {
+  z-index: -2;
+  background: linear-gradient(270deg, #03a9f4, #cc39a4, #ffb5d2);
+  border-radius: 10px;
+  width: 11em;
+  height: 11em;
+  transition: all .4s ease-in-out;
+  position: absolute;
+  transform: rotate(90deg);
+  box-shadow: inset 0 0 180px 5px #fff;
+}
+
+.SocialGrid-module__s-oYkW__main {
+  z-index: 1;
+  flex-wrap: wrap;
+  place-content: center;
+  align-items: center;
+  width: 14em;
+  height: 14em;
+  display: flex;
+  position: relative;
+}
+
+.SocialGrid-module__s-oYkW__card {
+  -webkit-backdrop-filter: blur(5px);
+  background: #ffffff98;
+  border: 1px solid #0000;
+  border-radius: 0;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  transition: all .4s ease-in-out, background-color .2s ease-in-out, background-image .2s ease-in-out;
+  display: flex;
+}
+
+.SocialGrid-module__s-oYkW__card1 {
+  border-top-left-radius: 10px;
+}
+
+.SocialGrid-module__s-oYkW__card3 {
+  border-top-right-radius: 10px;
+}
+
+.SocialGrid-module__s-oYkW__card7 {
+  border-bottom-left-radius: 10px;
+}
+
+.SocialGrid-module__s-oYkW__card9 {
+  border-bottom-right-radius: 10px;
+}
+
+.SocialGrid-module__s-oYkW__icon {
+  opacity: 0;
+  width: 24px;
+  height: 24px;
+  transition: all .2s ease-in-out;
+}
+
+.SocialGrid-module__s-oYkW__instagram {
+  fill: #cc39a4;
+  color: #cc39a4;
+}
+
+.SocialGrid-module__s-oYkW__twitter {
+  fill: #03a9f4;
+  color: #03a9f4;
+}
+
+.SocialGrid-module__s-oYkW__linkedin {
+  fill: #0077b5;
+  color: #0077b5;
+}
+
+.SocialGrid-module__s-oYkW__gmail {
+  fill: #ea4335;
+  color: #ea4335;
+}
+
+.SocialGrid-module__s-oYkW__uiverse {
+  fill: #6248ff;
+  color: #6248ff;
+}
+
+.SocialGrid-module__s-oYkW__discord {
+  fill: #8c9eff;
+  color: #8c9eff;
+}
+
+.SocialGrid-module__s-oYkW__github {
+  fill: #000;
+  color: #000;
+}
+
+.SocialGrid-module__s-oYkW__telegram {
+  fill: #29b6f6;
+  color: #29b6f6;
+}
+
+.SocialGrid-module__s-oYkW__facebook {
+  fill: #1877f2;
+  color: #1877f2;
+}
+
+.SocialGrid-module__s-oYkW__main:hover, .SocialGrid-module__s-oYkW__main.SocialGrid-module__s-oYkW__active {
+  cursor: pointer;
+}
+
+.SocialGrid-module__s-oYkW__main:hover .SocialGrid-module__s-oYkW__main_back, .SocialGrid-module__s-oYkW__main.SocialGrid-module__s-oYkW__active .SocialGrid-module__s-oYkW__main_back {
+  opacity: 0;
+}
+
+.SocialGrid-module__s-oYkW__main:hover .SocialGrid-module__s-oYkW__card, .SocialGrid-module__s-oYkW__main.SocialGrid-module__s-oYkW__active .SocialGrid-module__s-oYkW__card {
+  background: #fff3;
+  border: 1px solid #ffffff4d;
+  border-radius: 10px;
+  margin: .2em;
+  box-shadow: 0 4px 30px #0000001a;
+}
+
+.SocialGrid-module__s-oYkW__main:hover .SocialGrid-module__s-oYkW__card5, .SocialGrid-module__s-oYkW__main.SocialGrid-module__s-oYkW__active .SocialGrid-module__s-oYkW__card5 {
+  border-color: #0000;
+}
+
+.SocialGrid-module__s-oYkW__main:hover .SocialGrid-module__s-oYkW__text, .SocialGrid-module__s-oYkW__main.SocialGrid-module__s-oYkW__active .SocialGrid-module__s-oYkW__text {
+  opacity: 0;
+  z-index: -3;
+}
+
+.SocialGrid-module__s-oYkW__main:hover .SocialGrid-module__s-oYkW__icon, .SocialGrid-module__s-oYkW__main.SocialGrid-module__s-oYkW__active .SocialGrid-module__s-oYkW__icon {
+  opacity: 1;
+}
+
+.SocialGrid-module__s-oYkW__card1:hover {
+  background-color: #cc39a4;
+}
+
+.SocialGrid-module__s-oYkW__card1:hover .SocialGrid-module__s-oYkW__icon {
+  fill: #fff;
+  color: #fff;
+}
+
+.SocialGrid-module__s-oYkW__card2:hover {
+  background-color: #03a9f4;
+}
+
+.SocialGrid-module__s-oYkW__card2:hover .SocialGrid-module__s-oYkW__icon {
+  fill: #fff;
+  color: #fff;
+}
+
+.SocialGrid-module__s-oYkW__card3:hover {
+  background-color: #0077b5;
+}
+
+.SocialGrid-module__s-oYkW__card3:hover .SocialGrid-module__s-oYkW__icon {
+  fill: #fff;
+  color: #fff;
+}
+
+.SocialGrid-module__s-oYkW__card4:hover {
+  background-color: #ea4335;
+}
+
+.SocialGrid-module__s-oYkW__card4:hover .SocialGrid-module__s-oYkW__icon {
+  fill: #fff;
+  color: #fff;
+}
+
+.SocialGrid-module__s-oYkW__card5:hover {
+  animation: .1s forwards SocialGrid-module__s-oYkW__backgroundIMG;
+}
+
+.SocialGrid-module__s-oYkW__card5:hover .SocialGrid-module__s-oYkW__icon {
+  color: #fff;
+  fill: #fff;
+}
+
+@keyframes SocialGrid-module__s-oYkW__backgroundIMG {
+  100% {
+    background-image: linear-gradient(#bf66ff, #6248ff, #00ddeb);
+  }
+}
+
+.SocialGrid-module__s-oYkW__card6:hover {
+  background-color: #8c9eff;
+}
+
+.SocialGrid-module__s-oYkW__card6:hover .SocialGrid-module__s-oYkW__icon {
+  fill: #fff;
+  color: #fff;
+}
+
+.SocialGrid-module__s-oYkW__card7:hover {
+  background-color: #000;
+}
+
+.SocialGrid-module__s-oYkW__card7:hover .SocialGrid-module__s-oYkW__icon {
+  fill: #fff;
+  color: #fff;
+}
+
+.SocialGrid-module__s-oYkW__card8:hover {
+  background-color: #29b6f6;
+}
+
+.SocialGrid-module__s-oYkW__card8:hover .SocialGrid-module__s-oYkW__icon {
+  fill: #fff;
+  color: #fff;
+}
+
+.SocialGrid-module__s-oYkW__card9:hover {
+  background-color: #1877f2;
+}
+
+.SocialGrid-module__s-oYkW__card9:hover .SocialGrid-module__s-oYkW__icon {
+  fill: #fff;
+  color: #fff;
+}
+
+.SocialGrid-module__s-oYkW__text {
+  color: #000;
+  text-align: center;
+  letter-spacing: .33em;
+  z-index: 3;
+  font-size: .7em;
+  font-weight: bold;
+  line-height: 2;
+  transition: all .4s ease-in-out;
+  position: absolute;
+}
+
+/*# sourceMappingURL=rajeswar_tech_src_components_ui_SocialGrid_module_css_bad6b30c._.single.css.map*/

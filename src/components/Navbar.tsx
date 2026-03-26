@@ -45,6 +45,47 @@ export default function Navbar() {
                 onConfirm={confirmResume}
             />
 
+            {/* Desktop Left-Side Project Structure Menu (click-based, same as mobile) */}
+            <div className="fixed top-6 left-6 z-[100] hidden md:block">
+                <div className="relative inline-block text-black font-mono text-sm">
+                    <div
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="bg-white py-2 rounded-md shadow-lg hover:cursor-pointer flex justify-center items-center gap-3 px-4 transition-transform hover:scale-105 active:scale-95"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 14" height="20" width="20">
+                            <path fill="#FFA000" d="M16.2 1.75H8.1L6.3 0H1.8C0.81 0 0 0.7875 0 1.75V12.25C0 13.2125 0.81 14 1.8 14H15.165L18 9.1875V3.5C18 2.5375 17.19 1.75 16.2 1.75Z"></path>
+                            <path fill="#FFCA28" d="M16.2 2H1.8C0.81 2 0 2.77143 0 3.71429V12.2857C0 13.2286 0.81 14 1.8 14H16.2C17.19 14 18 13.2286 18 12.2857V3.71429C18 2.77143 17.19 2 16.2 2Z"></path>
+                        </svg>
+                        <p className="font-bold">Project Structure</p>
+                    </div>
+
+                    <AnimatePresence>
+                        {isOpen && (
+                            <>
+                                <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                                    className="absolute left-0 mt-4 w-64 bg-white border border-gray-200 rounded-md shadow-2xl z-50 origin-top-left text-sm"
+                                >
+                                    <ul className="p-4 space-y-1">
+                                        <li className="py-1 font-bold text-gray-700">📁 src</li>
+                                        <li className="pl-4 py-1 text-gray-600">📁 app</li>
+                                        <Link href="#home" onClick={() => setIsOpen(false)}><li className="pl-8 py-1.5 hover:bg-gray-100 cursor-pointer rounded transition-colors text-blue-600 font-semibold">📄 page.tsx <span className="text-xs text-gray-400 font-normal">(Home)</span></li></Link>
+                                        <li className="pl-4 py-1 mt-2 text-gray-600">📁 components</li>
+                                        <Link href="#about" onClick={() => setIsOpen(false)}><li className="pl-8 py-1.5 hover:bg-gray-100 cursor-pointer rounded transition-colors text-yellow-600 font-semibold">📄 About.tsx</li></Link>
+                                        <Link href="#projects" onClick={() => setIsOpen(false)}><li className="pl-8 py-1.5 hover:bg-gray-100 cursor-pointer rounded transition-colors text-green-600 font-semibold">📄 Projects.tsx</li></Link>
+                                        <Link href="#skills" onClick={() => setIsOpen(false)}><li className="pl-8 py-1.5 hover:bg-gray-100 cursor-pointer rounded transition-colors text-purple-600 font-semibold">📄 Skills.tsx</li></Link>
+                                        <Link href="#contact" onClick={() => setIsOpen(false)}><li className="pl-8 py-1.5 hover:bg-gray-100 cursor-pointer rounded transition-colors text-red-500 font-semibold">📄 Contact.tsx</li></Link>
+                                    </ul>
+                                </motion.div>
+                            </>
+                        )}
+                    </AnimatePresence>
+                </div>
+            </div>
+
             {/* Desktop Floating Dock */}
             <motion.header
                 initial={{ y: -100, opacity: 0 }}
@@ -82,46 +123,51 @@ export default function Navbar() {
                         RC.
                     </Link>
 
-                    <button
-                        className="text-[var(--primary-text)] focus:outline-none"
-                        onClick={() => setIsOpen(!isOpen)}
-                    >
-                        {isOpen ? <X /> : <Menu />}
-                    </button>
+                    {/* Mobile Project Structure Menu (Replacing Hamburger) */}
+                    <div className="relative inline-block text-black font-mono text-sm z-50">
+                        <div
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="bg-white py-2 rounded-md shadow-lg hover:cursor-pointer flex justify-center items-center gap-2 px-3 transition-transform active:scale-95"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 14" height="20" width="20">
+                                <path fill="#FFA000" d="M16.2 1.75H8.1L6.3 0H1.8C0.81 0 0 0.7875 0 1.75V12.25C0 13.2125 0.81 14 1.8 14H15.165L18 9.1875V3.5C18 2.5375 17.19 1.75 16.2 1.75Z"></path>
+                                <path fill="#FFCA28" d="M16.2 2H1.8C0.81 2 0 2.77143 0 3.71429V12.2857C0 13.2286 0.81 14 1.8 14H16.2C17.19 14 18 13.2286 18 12.2857V3.71429C18 2.77143 17.19 2 16.2 2Z"></path>
+                            </svg>
+                            <p className="font-bold text-xs truncate">Menu</p>
+                        </div>
+
+                        {/* Dropdown for Mobile */}
+                        <AnimatePresence>
+                            {isOpen && (
+                                <>
+                                    {/* Invisible backdrop to catch clicks outside */}
+                                    <div 
+                                        className="fixed inset-0 z-40" 
+                                        onClick={() => setIsOpen(false)}
+                                    />
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                        exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                                        className="absolute right-0 mt-4 w-64 bg-white border border-gray-200 rounded-md shadow-2xl z-50 origin-top-right text-sm"
+                                    >
+                                        <ul className="p-4 space-y-1 text-left">
+                                            <li className="py-1 font-bold text-gray-700">📁 src</li>
+                                            <li className="pl-4 py-1 text-gray-600">📁 app</li>
+                                            <Link href="#home" onClick={() => setIsOpen(false)}><li className="pl-8 py-2 md:py-1.5 hover:bg-gray-100 cursor-pointer rounded transition-colors text-blue-600 font-semibold active:bg-gray-200">📄 page.tsx <span className="text-xs text-gray-400 font-normal">(Home)</span></li></Link>
+                                            <li className="pl-4 py-1 mt-2 text-gray-600">📁 components</li>
+                                            <Link href="#about" onClick={() => setIsOpen(false)}><li className="pl-8 py-2 md:py-1.5 hover:bg-gray-100 cursor-pointer rounded transition-colors text-yellow-600 font-semibold active:bg-gray-200">📄 About.tsx</li></Link>
+                                            <Link href="#projects" onClick={() => setIsOpen(false)}><li className="pl-8 py-2 md:py-1.5 hover:bg-gray-100 cursor-pointer rounded transition-colors text-green-600 font-semibold active:bg-gray-200">📄 Projects.tsx</li></Link>
+                                            <Link href="#skills" onClick={() => setIsOpen(false)}><li className="pl-8 py-2 md:py-1.5 hover:bg-gray-100 cursor-pointer rounded transition-colors text-purple-600 font-semibold active:bg-gray-200">📄 Skills.tsx</li></Link>
+                                            <Link href="#contact" onClick={() => setIsOpen(false)}><li className="pl-8 py-2 md:py-1.5 hover:bg-gray-100 cursor-pointer rounded transition-colors text-red-500 font-semibold active:bg-gray-200">📄 Contact.tsx</li></Link>
+                                        </ul>
+                                    </motion.div>
+                                </>
+                            )}
+                        </AnimatePresence>
+                    </div>
                 </div>
             </header>
-
-            {/* Mobile Menu Overlay */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="fixed inset-0 bg-[var(--primary-bg)] z-40 flex flex-col items-center justify-center space-y-8 md:hidden pt-20"
-                    >
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className="text-3xl font-light text-[var(--primary-text)] hover:text-[var(--accent-color)] transition-colors"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                        <button
-                            onClick={(e) => {
-                                setIsOpen(false);
-                                handleResumeClick(e);
-                            }}
-                            className="text-xl font-bold text-[var(--accent-color)] border border-[var(--accent-color)] px-6 py-2 rounded-full"
-                        >
-                            View Resume
-                        </button>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </>
     );
 }

@@ -79,6 +79,7 @@ export default function Hero() {
         "Creative Developer"
     ];
     const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+    const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -253,7 +254,7 @@ export default function Hero() {
                     {[
                         { icon: Linkedin, href: "https://linkedin.com/in/rajeswarcharapalli" },
                         { icon: Github, href: "https://github.com/Rajj-c" },
-                        { icon: Mail, href: "mailto:rajeshwarcn@gmail.com" }
+                        { icon: Mail, href: "mailto:rajeswarcharapalli@gmail.com" }
                     ].map((item, i) => (
                         <a
                             key={i}
@@ -268,6 +269,108 @@ export default function Hero() {
                 </motion.div>
 
             </div>
+
+            {/* Bottom Right Floating Card from Uiverse */}
+            <div className="absolute overflow-visible bottom-4 right-4 md:bottom-12 md:right-12 z-50 scale-[0.7] md:scale-100 origin-bottom-right">
+                <div tabIndex={0} className="relative duration-300 transition-transform [transform:rotate3d(1_,-1,_1,_60deg)] hover:[transform:rotate3d(1_,-1,_1,_0deg)] focus:[transform:rotate3d(1_,-1,_1,_0deg)] active:[transform:rotate3d(1_,-1,_1,_0deg)] focus-within:[transform:rotate3d(1_,-1,_1,_0deg)] group border border-sky-900 border-4 overflow-hidden rounded-2xl h-52 w-72 bg-sky-800 p-5 flex flex-col items-start gap-4 shadow-2xl cursor-pointer">
+                    <div className="text-gray-50 z-20 relative">
+                        <span className="font-bold text-5xl">RAJ</span>
+                        <p className="text-xs">Software Engineer</p>
+                    </div>
+                    {/* Trigger for the Resume Modal */}
+                    <button 
+                        onClick={(e) => {
+                            e.preventDefault();
+                            if (window.innerWidth < 768) {
+                                setTimeout(() => setIsResumeModalOpen(true), 400);
+                            } else {
+                                setIsResumeModalOpen(true);
+                            }
+                        }}
+                        className="duration-300 hover:bg-sky-900 border hover:text-gray-50 bg-gray-50 font-semibold cursor-pointer text-sky-800 px-3 py-2 flex flex-row items-center gap-3 relative z-20 rounded-md pointer-events-auto"
+                    >
+                        View Resume 
+                        <svg y="0" xmlns="http://www.w3.org/2000/svg" x="0" width="100" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" height="100" className="w-6 h-6 fill-current">
+                            <path fillRule="evenodd" d="M22.1,77.9a4,4,0,0,1,4-4H73.9a4,4,0,0,1,0,8H26.1A4,4,0,0,1,22.1,77.9ZM35.2,47.2a4,4,0,0,1,5.7,0L46,52.3V22.1a4,4,0,1,1,8,0V52.3l5.1-5.1a4,4,0,0,1,5.7,0,4,4,0,0,1,0,5.6l-12,12a3.9,3.9,0,0,1-5.6,0l-12-12A4,4,0,0,1,35.2,47.2Z"></path>
+                        </svg>
+                    </button>
+
+                    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" className="group-hover:scale-125 duration-500 absolute -bottom-0.5 -right-20 w-48 h-48 z-10 -my-2 fill-gray-50 stroke-sky-900"><path strokeWidth="5" strokeMiterlimit="10" d="M 50.4 51 C 40.5 49.1 40 46 40 44 v -1.2 a 18.9 18.9 0 0 0 5.7 -8.8 h 0.1 c 3 0 3.8 -6.3 3.8 -7.3 s 0.1 -4.7 -3 -4.7 C 53 4 30 0 22.3 6 c -5.4 0 -5.9 8 -3.9 16 c -3.1 0 -3 3.8 -3 4.7 s 0.7 7.3 3.8 7.3 c 1 3.6 2.3 6.9 4.7 9 v 1.2 c 0 2 0.5 5 -9.5 6.8 S 2 62 2 62 h 60 a 14.6 14.6 0 0 0 -11.6 -11 z" data-name="layer1"></path></svg>
+                    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" className="group-hover:scale-125 duration-200 absolute -bottom-0.5 -right-20 w-48 h-48 z-10 -my-2 fill-gray-50 stroke-sky-700"><path strokeWidth="2" strokeMiterlimit="10" d="M 50.4 51 C 40.5 49.1 40 46 40 44 v -1.2 a 18.9 18.9 0 0 0 5.7 -8.8 h 0.1 c 3 0 3.8 -6.3 3.8 -7.3 s 0.1 -4.7 -3 -4.7 C 53 4 30 0 22.3 6 c -5.4 0 -5.9 8 -3.9 16 c -3.1 0 -3 3.8 -3 4.7 s 0.7 7.3 3.8 7.3 c 1 3.6 2.3 6.9 4.7 9 v 1.2 c 0 2 0.5 5 -9.5 6.8 S 2 62 2 62 h 60 a 14.6 14.6 0 0 0 -11.6 -11 z" data-name="layer1"></path></svg>
+                </div>
+            </div>
+
+            {/* Resume Heads-Up Modal */}
+            <AnimatePresence>
+                {isResumeModalOpen && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                        {/* Backdrop */}
+                        <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsResumeModalOpen(false)}
+                            className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
+                        />
+                        
+                        {/* Modal Content */}
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                            className="relative w-full max-w-md bg-[#111111] border border-white/10 rounded-2xl p-8 shadow-2xl overflow-hidden"
+                        >
+                            <div className="flex flex-col items-center text-center relative z-10">
+                                {/* Warning Icon */}
+                                <div className="w-16 h-16 rounded-full bg-[#1A1A1A] flex items-center justify-center mb-6 border border-[#FFD700]/20">
+                                    <svg className="w-8 h-8 text-[#FFD700]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01" />
+                                    </svg>
+                                </div>
+
+                                {/* Title */}
+                                <h3 className="text-2xl font-bold text-white mb-2 relative pb-2">
+                                    Just a Heads Up! 🎓
+                                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#FFD700] rounded-full" />
+                                </h3>
+
+                                {/* Subtitle */}
+                                <p className="text-gray-300 mt-6 mb-8 text-lg">
+                                    I'm currently a <span className="font-bold text-white tracking-wide">B.Tech 3rd Year Student</span>.
+                                </p>
+
+                                {/* Quote Box */}
+                                <div className="w-full bg-white/5 border border-white/10 rounded-xl p-6 mb-8 text-sm text-gray-400 italic font-light leading-relaxed">
+                                    "My journey is still unfolding. What you're about to see is a snapshot of my growth, not the final destination. Thanks for checking it out!"
+                                </div>
+
+                                {/* Action Buttons */}
+                                <div className="flex gap-4 w-full">
+                                    <button 
+                                        onClick={() => setIsResumeModalOpen(false)}
+                                        className="flex-1 py-3 px-4 rounded-xl border border-white/20 text-white font-medium hover:bg-white/10 transition-colors cursor-pointer"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <a 
+                                        href="https://drive.google.com/file/d/171r1Xac3pCxE1UbIiep9yhefYsGzC0Va/view?usp=sharing"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={() => setIsResumeModalOpen(false)}
+                                        className="flex-1 py-3 px-4 rounded-xl bg-[#FFD700] text-black font-bold hover:bg-[#FFD700]/90 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                                    >
+                                        View Resume
+                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }

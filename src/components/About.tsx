@@ -5,9 +5,8 @@ import Image from 'next/image';
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
 import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 import ResumeModal from './ResumeModal';
-
 import { TextDecrypt } from './ui/TextDecrypt';
-
+import styles from './ui/AboutButton.module.css';
 
 // 3D Tilt Card Component
 function TiltCard({ children }: { children: React.ReactNode }) {
@@ -190,9 +189,13 @@ export default function About() {
                             <div className="pt-8">
                                 <button
                                     onClick={handleResumeClick}
-                                    className="btn-primary inline-flex items-center gap-2 px-8 py-3 text-sm font-bold uppercase tracking-widest hover:scale-105 transition-transform"
+                                    className={styles.button}
                                 >
-                                    View Resume <ArrowRight size={18} />
+                                    <div className={styles.buttonInner}>
+                                        <span className={styles.buttonContent}>
+                                            View Resume <ArrowRight size={18} />
+                                        </span>
+                                    </div>
                                 </button>
                             </div>
                         </motion.div>

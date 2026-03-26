@@ -1,0 +1,147 @@
+.main_back {
+  position: absolute;
+  border-radius: 10px;
+  transform: rotate(90deg);
+  width: 11em;
+  height: 11em;
+  background: linear-gradient(270deg, #03a9f4, #cc39a4, #ffb5d2);
+  z-index: -2;
+  box-shadow: inset 0px 0px 180px 5px #ffffff;
+  transition: 0.4s ease-in-out;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  width: 14em;
+  height: 14em;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.596);
+  backdrop-filter: blur(5px);
+  border: 1px solid transparent;
+  -webkit-backdrop-filter: blur(5px);
+  transition: 0.4s ease-in-out, 0.2s background-color ease-in-out,
+    0.2s background-image ease-in-out;
+  border-radius: 0;
+}
+
+/* Base border radii for layout shape */
+.card1 { border-top-left-radius: 10px; }
+.card3 { border-top-right-radius: 10px; }
+.card7 { border-bottom-left-radius: 10px; }
+.card9 { border-bottom-right-radius: 10px; }
+
+.icon {
+  opacity: 0;
+  transition: 0.2s ease-in-out;
+  width: 24px;
+  height: 24px;
+}
+
+/* Default colors */
+.instagram { fill: #cc39a4; color: #cc39a4; }
+.twitter { fill: #03a9f4; color: #03a9f4; }
+.linkedin { fill: #0077b5; color: #0077b5; }
+.gmail { fill: #EA4335; color: #EA4335; }
+.uiverse { fill: #6248ff; color: #6248ff; }
+.discord { fill: #8c9eff; color: #8c9eff; }
+.github { fill: black; color: black; }
+.telegram { fill: #29b6f6; color: #29b6f6; }
+.facebook { fill: #1877F2; color: #1877F2; }
+
+/* Root hover effects */
+.main:hover,
+.main.active {
+  cursor: pointer;
+}
+
+.main:hover .main_back,
+.main.active .main_back {
+  opacity: 0;
+}
+
+.main:hover .card,
+.main.active .card {
+  margin: 0.2em;
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.main:hover .card5,
+.main.active .card5 {
+  border-color: transparent;
+}
+
+.main:hover .text,
+.main.active .text {
+  opacity: 0;
+  z-index: -3;
+}
+
+.main:hover .icon,
+.main.active .icon {
+  opacity: 1;
+}
+
+/* Hover effects for individual cards */
+.card1:hover { background-color: #cc39a4; }
+.card1:hover .icon { fill: white; color: white; }
+
+.card2:hover { background-color: #03a9f4; }
+.card2:hover .icon { fill: white; color: white; }
+
+.card3:hover { background-color: #0077b5; }
+.card3:hover .icon { fill: white; color: white; }
+
+.card4:hover { background-color: #EA4335; }
+.card4:hover .icon { fill: white; color: white; }
+
+.card5:hover {
+  animation: backgroundIMG 0.1s;
+  animation-fill-mode: forwards;
+}
+.card5:hover .icon { color: white; fill: white; }
+
+@keyframes backgroundIMG {
+  100% {
+    background-image: linear-gradient(#bf66ff, #6248ff, #00ddeb);
+  }
+}
+
+.card6:hover { background-color: #8c9eff; }
+.card6:hover .icon { fill: white; color: white; }
+
+.card7:hover { background-color: black; }
+.card7:hover .icon { fill: white; color: white; }
+
+.card8:hover { background-color: #29b6f6; }
+.card8:hover .icon { fill: white; color: white; }
+
+.card9:hover { background-color: #1877F2; }
+.card9:hover .icon { fill: white; color: white; }
+
+.text {
+  position: absolute;
+  font-size: 0.7em;
+  transition: 0.4s ease-in-out;
+  color: #000000;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 0.33em;
+  line-height: 2;
+  z-index: 3;
+}
