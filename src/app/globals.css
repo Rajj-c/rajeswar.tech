@@ -74,6 +74,38 @@ input, textarea, select {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* ── Star / Crack preloader animation (chatbot button) ──────────────────── */
+.star-preloader {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 8px #a855f7);
+}
+
+.star-crack {
+  position: absolute;
+  width: 42%;
+  aspect-ratio: 1;
+  background-color: #fef3fc;
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%,
+    79% 91%, 50% 70%, 21% 91%, 32% 57%,
+    2% 35%, 39% 35%
+  );
+  animation: star-spin 6s linear infinite;
+}
+.star-crack:nth-child(2) { width: 52%; animation-delay: 1s;   background-color: #e9d5ff; }
+.star-crack:nth-child(3) { width: 62%; animation-delay: 1.5s; background-color: #c4b5fd; }
+.star-crack:nth-child(4) { width: 72%; animation-delay: 2s;   background-color: #a78bfa; }
+.star-crack:nth-child(5) { width: 82%; animation-delay: 2.5s; background-color: #8b5cf6; }
+
+@keyframes star-spin {
+  to { rotate: 360deg; }
+}
+
 
 h1,
 h2,

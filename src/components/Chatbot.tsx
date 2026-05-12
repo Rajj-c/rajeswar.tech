@@ -1,259 +1,249 @@
 'use client';
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Bot, User, Loader2, Mail } from "lucide-react";
-import clsx from "clsx";
+import { Bot, X, MessageCircle, Zap, Cpu, Sparkles } from "lucide-react";
 
-interface Message {
-    id: number;
-    role: "user" | "bot";
-    text: string;
+const WHATSAPP = "https://wa.me/917305493515?text=Hi%20Raj!%20I%20came%20from%20your%20portfolio%20and%20wanted%20to%20connect.";
+
+// Orbiting dot
+function OrbitDot({ angle, radius, delay, color }: { angle: number; radius: number; delay: number; color: string }) {
+    return (
+        <motion.div
+            className="absolute w-2 h-2 rounded-full"
+            style={{ backgroundColor: color, top: "50%", left: "50%" }}
+            animate={{
+                x: [
+                    Math.cos((angle * Math.PI) / 180) * radius,
+                    Math.cos(((angle + 180) * Math.PI) / 180) * radius,
+                    Math.cos((angle * Math.PI) / 180) * radius,
+                ],
+                y: [
+                    Math.sin((angle * Math.PI) / 180) * radius,
+                    Math.sin(((angle + 180) * Math.PI) / 180) * radius,
+                    Math.sin((angle * Math.PI) / 180) * radius,
+                ],
+                opacity: [0.4, 1, 0.4],
+                scale: [0.8, 1.3, 0.8],
+            }}
+            transition={{ duration: 3, repeat: Infinity, delay, ease: "easeInOut" }}
+        />
+    );
+}
+
+// Animated progress bar
+function BuildBar({ label, pct, color, delay }: { label: string; pct: number; color: string; delay: number }) {
+    return (
+        <div className="space-y-1">
+            <div className="flex justify-between text-[11px] text-gray-400 font-mono">
+                <span>{label}</span>
+                <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: delay + 0.6 }}
+                    style={{ color }}
+                >
+                    {pct}%
+                </motion.span>
+            </div>
+            <div className="h-1.5 w-full rounded-full bg-white/5 overflow-hidden">
+                <motion.div
+                    className="h-full rounded-full"
+                    style={{ background: `linear-gradient(90deg, ${color}88, ${color})` }}
+                    initial={{ width: 0 }}
+                    animate={{ width: `${pct}%` }}
+                    transition={{ duration: 1.2, delay, ease: "easeOut" }}
+                />
+            </div>
+        </div>
+    );
 }
 
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
-    const [input, setInput] = useState("");
-    const [messages, setMessages] = useState<Message[]>([
-        { id: 1, role: "bot", text: "Hey! I'm Raj's AI. Keep it brief, I'm busy optimizing nothing. 🙄" }
-    ]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [showEmailPrompt, setShowEmailPrompt] = useState(false);
-    const [pendingQuestion, setPendingQuestion] = useState("");
-    const [sessionId, setSessionId] = useState(() => Math.random().toString(36).substring(7) + Date.now().toString(36));
-
-    const bottomRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (bottomRef.current) {
-            bottomRef.current.scrollIntoView({ behavior: "smooth" });
-        }
-    }, [messages, isLoading]);
-
-    const handleSend = async () => {
-        if (!input.trim()) return;
-
-        const userMessage = { id: Date.now(), role: "user" as const, text: input };
-        setMessages((prev) => [...prev, userMessage]);
-        setInput("");
-        setIsLoading(true);
-        setShowEmailPrompt(false); // Reset email prompt on new question
-
-        try {
-            // Prepare history for API (limit to last 10 messages to save tokens)
-            const history = messages.slice(-10).map(m => ({
-                role: m.role,
-                text: m.text
-            }));
-
-            const res = await fetch("/api/chat", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: userMessage.text, history, sessionId }),
-            });
-
-            const data = await res.json();
-
-            if (data.sessionId) {
-                // Update the sessionId if the server created a new one
-                setSessionId(data.sessionId);
-            }
-
-            if (data.reply && data.reply.includes("I_DONT_KNOW_EXACTLY")) {
-                setPendingQuestion(userMessage.text);
-                setShowEmailPrompt(true);
-                setMessages((prev) => [
-                    ...prev,
-                    { id: Date.now() + 1, role: "bot", text: "I honestly have no clue. 🤷‍♂️ Do you want me to ask Raj directly?" }
-                ]);
-            } else {
-                setMessages((prev) => [...prev, { id: Date.now() + 1, role: "bot", text: data.reply }]);
-            }
-
-        } catch (error) {
-            setMessages((prev) => [...prev, { id: Date.now() + 1, role: "bot", text: "My brain hurts. Something went wrong." }]);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const handleEmailRaj = async () => {
-        setIsLoading(true);
-        try {
-            // Use Formspree to send the email
-            const res = await fetch("https://formspree.io/f/mldllgob", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: "AI Bot User",
-                    email: "bot@rajeswar.tech",
-                    message: `User asked: "${pendingQuestion}". Bot didn't know.`
-                }),
-            });
-
-            if (res.ok) {
-                setMessages((prev) => [...prev, { id: Date.now(), role: "bot", text: "Fine. I sent him an email. He'll reply... eventually. 📨" }]);
-            } else {
-                setMessages((prev) => [...prev, { id: Date.now(), role: "bot", text: "Ugh, even the email service is flawed. Couldn't send it." }]);
-            }
-        } catch (e) {
-            setMessages((prev) => [...prev, { id: Date.now(), role: "bot", text: "Failed to send email." }]);
-        }
-        setShowEmailPrompt(false);
-        setIsLoading(false);
-    };
 
     return (
-        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end pointer-events-none">
+        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
 
+            {/* ── Popup card ── */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                        initial={{ opacity: 0, scale: 0.85, y: 16 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.8, y: 20 }}
-                        className="mb-4 w-[calc(100vw-32px)] sm:w-[350px] max-w-[420px] h-[75vh] sm:h-[500px] max-h-[600px] bg-[var(--secondary-bg)] rounded-2xl shadow-2xl border border-gray-700 flex flex-col overflow-hidden pointer-events-auto"
+                        exit={{ opacity: 0, scale: 0.85, y: 16 }}
+                        transition={{ type: "spring", damping: 20, stiffness: 280 }}
+                        className="mb-4 w-[calc(100vw-32px)] sm:w-[340px] max-w-[400px] rounded-2xl shadow-2xl border border-white/10 overflow-hidden"
+                        style={{
+                            background: "linear-gradient(145deg, #0f0f1a, #131325, #0d0d1f)",
+                        }}
                     >
+                        {/* Glow rim */}
+                        <div className="absolute top-0 left-1/4 right-1/4 h-[1px] bg-gradient-to-r from-transparent via-purple-500/60 to-transparent" />
+
                         {/* Header */}
-                        <div className="p-4 bg-[var(--primary-bg)] border-b border-gray-700 flex justify-between items-center">
+                        <div className="flex items-center justify-between px-5 pt-5 pb-3">
                             <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] flex items-center justify-center">
-                                    <Bot size={18} className="text-white" />
+                                <div className="w-7 h-7 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
+                                    <Bot size={14} className="text-purple-400" />
                                 </div>
-                                <div>
-                                    <h3 className="font-bold text-primary-text text-sm">Raj's Alter Ego</h3>
-                                    <span className="text-[10px] text-green-400 flex items-center gap-1">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> Online & Judging You
-                                    </span>
-                                </div>
+                                <span className="text-sm font-bold text-white">Raj&apos;s AI Agent</span>
                             </div>
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className="text-gray-400 hover:text-white transition-colors"
-                                aria-label="Close Chat"
+                                className="p-1.5 rounded-full hover:bg-white/10 text-gray-500 hover:text-white transition-colors"
+                                aria-label="Close"
                             >
-                                <X size={20} />
+                                <X size={15} />
                             </button>
                         </div>
 
-                        {/* Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[var(--secondary-bg)] scrollbar-hide">
-                            {messages.map((msg) => (
-                                <div
-                                    key={msg.id}
-                                    className={clsx(
-                                        "flex gap-2 max-w-[85%]",
-                                        msg.role === "user" ? "ml-auto flex-row-reverse" : ""
-                                    )}
-                                >
-                                    <div className={clsx(
-                                        "w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1",
-                                        msg.role === "user" ? "bg-gray-700" : "bg-[var(--gradient-start)]"
-                                    )}>
-                                        {msg.role === "user" ? <User size={14} /> : <Bot size={14} />}
-                                    </div>
+                        {/* Central animation */}
+                        <div className="flex flex-col items-center py-6 px-5 relative">
 
-                                    <div className={clsx(
-                                        "p-3 rounded-2xl text-sm",
-                                        msg.role === "user"
-                                            ? "bg-[var(--gradient-start)] text-white rounded-tr-none"
-                                            : "bg-gray-800 text-[var(--secondary-text)] rounded-tl-none border border-gray-700"
-                                    )}>
-                                        {msg.text}
-                                    </div>
-                                </div>
-                            ))}
-
-                            {/* Typing Indicator */}
-                            {isLoading && (
-                                <div className="flex gap-2 max-w-[85%]">
-                                    <div className="w-6 h-6 rounded-full bg-[var(--gradient-start)] flex items-center justify-center flex-shrink-0 mt-1">
-                                        <Bot size={14} />
-                                    </div>
-                                    <div className="bg-gray-800 p-3 rounded-2xl rounded-tl-none border border-gray-700">
-                                        <Loader2 size={16} className="animate-spin text-[var(--secondary-text)]" />
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Email Prompt Action */}
-                            {showEmailPrompt && (
+                            {/* Orbit ring */}
+                            <div className="relative w-28 h-28 flex items-center justify-center mb-5">
+                                {/* Outer glow ring */}
                                 <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    className="flex gap-2 w-full justify-center mt-2"
-                                >
-                                    <button
-                                        onClick={handleEmailRaj}
-                                        className="btn-primary text-xs py-2 px-4 flex items-center gap-2"
-                                        disabled={isLoading}
-                                    >
-                                        <Mail size={14} />
-                                        Yes, Tell Raj
-                                    </button>
-                                    <button
-                                        onClick={() => {
-                                            setShowEmailPrompt(false);
-                                            setMessages(prev => [...prev, { id: Date.now(), role: "bot", text: "Okay, fine. Keep your secrets. 😒" }]);
-                                        }}
-                                        className="bg-gray-700 text-gray-300 hover:bg-gray-600 rounded-lg px-4 py-2 text-xs transition-colors"
-                                    >
-                                        No, Nevermind
-                                    </button>
-                                </motion.div>
-                            )}
+                                    className="absolute inset-0 rounded-full border border-purple-500/20"
+                                    animate={{ scale: [1, 1.08, 1], opacity: [0.3, 0.7, 0.3] }}
+                                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                                />
+                                <motion.div
+                                    className="absolute inset-3 rounded-full border border-yellow-400/15"
+                                    animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.5, 0.2] }}
+                                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                                />
 
-                            <div ref={bottomRef} />
-                        </div>
+                                {/* Orbiting dots */}
+                                <OrbitDot angle={0}   radius={48} delay={0}    color="#a855f7" />
+                                <OrbitDot angle={90}  radius={48} delay={0.75} color="#ffd700" />
+                                <OrbitDot angle={180} radius={48} delay={1.5}  color="#06b6d4" />
+                                <OrbitDot angle={270} radius={48} delay={2.25} color="#10b981" />
 
-                        {/* Input */}
-                        <div className="p-3 bg-[var(--primary-bg)] border-t border-gray-700 flex gap-2">
-                            <input
-                                type="text"
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                                placeholder="Ask me something..."
-                                className="flex-1 bg-[var(--secondary-bg)] text-primary-text text-sm rounded-full px-4 py-2 border border-gray-700 focus:outline-none focus:border-[var(--accent-color)]"
-                                disabled={isLoading}
-                            />
-                            <button
-                                onClick={handleSend}
-                                disabled={isLoading || !input.trim()}
-                                className="p-2 bg-[var(--gradient-start)] text-white rounded-full hover:bg-[var(--gradient-end)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                {/* Center bot icon with spinning gear */}
+                                <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-600/30 to-blue-600/20 border border-purple-500/30 flex items-center justify-center shadow-lg shadow-purple-500/10">
+                                    <Bot size={28} className="text-purple-300" />
+                                    {/* Spinning gear badge */}
+                                    <motion.div
+                                        className="absolute -bottom-1.5 -right-1.5 w-6 h-6 rounded-full bg-yellow-400 flex items-center justify-center text-black shadow-md"
+                                        animate={{ rotate: 360 }}
+                                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                                    >
+                                        <span className="text-[10px]">⚙️</span>
+                                    </motion.div>
+                                </div>
+                            </div>
+
+                            {/* Title */}
+                            <motion.h3
+                                className="text-white font-extrabold text-base mb-1 text-center"
+                                initial={{ opacity: 0, y: 8 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 }}
                             >
-                                <Send size={18} />
-                            </button>
+                                Upgrading to v2.0
+                            </motion.h3>
+                            <motion.p
+                                className="text-gray-400 text-xs text-center mb-5 leading-relaxed"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.35 }}
+                            >
+                                Something smarter is brewing. The AI agent is being rebuilt from scratch with deeper knowledge and real-time reasoning.
+                            </motion.p>
+
+                            {/* Build progress bars */}
+                            <div className="w-full space-y-3 mb-5">
+                                <BuildBar label="Agent Knowledge Base"  pct={100} color="#10b981" delay={0.4} />
+                                <BuildBar label="Conversation Memory"   pct={78}  color="#a855f7" delay={0.6} />
+                                <BuildBar label="Tool Integrations"     pct={55}  color="#ffd700" delay={0.8} />
+                                <BuildBar label="Cloud Deployment"      pct={30}  color="#06b6d4" delay={1.0} />
+                            </div>
+
+                            {/* Status chips */}
+                            <div className="flex gap-2 flex-wrap justify-center mb-5">
+                                {[
+                                    { icon: <Cpu size={10} />,      label: "ADK Agent",   color: "text-purple-400 border-purple-500/30 bg-purple-500/10" },
+                                    { icon: <Zap size={10} />,      label: "Tool Calls",  color: "text-yellow-400 border-yellow-500/30 bg-yellow-500/10" },
+                                    { icon: <Sparkles size={10} />, label: "Smart Memory",color: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10" },
+                                ].map((chip) => (
+                                    <span
+                                        key={chip.label}
+                                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full border text-[10px] font-bold uppercase tracking-wide ${chip.color}`}
+                                    >
+                                        {chip.icon}{chip.label}
+                                    </span>
+                                ))}
+                            </div>
+
+                            {/* WhatsApp CTA */}
+                            <motion.a
+                                href={WHATSAPP}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.97 }}
+                                className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-green-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-green-500/20 hover:shadow-green-500/30 transition-shadow"
+                            >
+                                <MessageCircle size={15} />
+                                Chat with Raj on WhatsApp
+                            </motion.a>
+
+                            <p className="text-[10px] text-gray-600 mt-3 text-center">
+                                Until the agent is live, Raj responds personally within 24h
+                            </p>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-14 h-14 rounded-full bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] flex items-center justify-center shadow-lg hover:shadow-[0_0_20px_var(--accent-color)] transition-all duration-300 transform hover:scale-110 pointer-events-auto group"
-                aria-label="Toggle Chatbot"
+            {/* ── Floating toggle button ── */}
+            <motion.button
+                onClick={() => setIsOpen((p) => !p)}
+                aria-label="Open AI Chat"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.93 }}
+                className="relative w-14 h-14 rounded-full shadow-2xl flex items-center justify-center cursor-pointer bg-[#0d0d1a] border border-white/10"
             >
-                <AnimatePresence mode='wait'>
+                {/* Pulse ring */}
+                <motion.span
+                    className="absolute inset-0 rounded-full bg-purple-500 opacity-20"
+                    animate={{ scale: [1, 1.6, 1], opacity: [0.2, 0, 0.2] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+                />
+
+                <AnimatePresence mode="wait">
                     {isOpen ? (
-                        <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
-                            <X size={28} className="text-white" />
+                        <motion.div
+                            key="x"
+                            initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
+                            animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                            exit={{ rotate: 90, opacity: 0, scale: 0.6 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            <X size={22} className="text-white" />
                         </motion.div>
                     ) : (
-                        <motion.div key="chat" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0, opacity: 0 }}>
-                            <MessageCircle size={28} className="text-white fill-current" />
+                        <motion.div
+                            key="star"
+                            initial={{ opacity: 0, scale: 0.6 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.6 }}
+                            transition={{ duration: 0.2 }}
+                            className="w-full h-full"
+                        >
+                            <div className="star-preloader">
+                                <div className="star-crack" />
+                                <div className="star-crack" />
+                                <div className="star-crack" />
+                                <div className="star-crack" />
+                                <div className="star-crack" />
+                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
-
-                {/* Tooltip */}
-                {!isOpen && (
-                    <span className="absolute right-full mr-4 bg-gray-800 text-white text-xs px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-gray-700">
-                        Chat with AI Raj 🤖
-                    </span>
-                )}
-            </button>
-
+            </motion.button>
         </div>
     );
 }
