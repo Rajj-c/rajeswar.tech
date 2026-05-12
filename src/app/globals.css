@@ -82,14 +82,14 @@ input, textarea, select {
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 8px #a855f7);
+  filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 10px rgba(255,255,255,0.4));
 }
 
 .star-crack {
   position: absolute;
   width: 42%;
   aspect-ratio: 1;
-  background-color: #fef3fc;
+  background-color: #ffffff;
   clip-path: polygon(
     50% 0%, 61% 35%, 98% 35%, 68% 57%,
     79% 91%, 50% 70%, 21% 91%, 32% 57%,
@@ -97,10 +97,10 @@ input, textarea, select {
   );
   animation: star-spin 6s linear infinite;
 }
-.star-crack:nth-child(2) { width: 52%; animation-delay: 1s;   background-color: #e9d5ff; }
-.star-crack:nth-child(3) { width: 62%; animation-delay: 1.5s; background-color: #c4b5fd; }
-.star-crack:nth-child(4) { width: 72%; animation-delay: 2s;   background-color: #a78bfa; }
-.star-crack:nth-child(5) { width: 82%; animation-delay: 2.5s; background-color: #8b5cf6; }
+.star-crack:nth-child(2) { width: 52%; animation-delay: 1s;   background-color: #f5f5f5; }
+.star-crack:nth-child(3) { width: 62%; animation-delay: 1.5s; background-color: #eeeeee; }
+.star-crack:nth-child(4) { width: 72%; animation-delay: 2s;   background-color: #e8e8e8; }
+.star-crack:nth-child(5) { width: 82%; animation-delay: 2.5s; background-color: #e0e0e0; }
 
 @keyframes star-spin {
   to { rotate: 360deg; }
