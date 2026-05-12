@@ -20,6 +20,7 @@ export default function Chatbot() {
     const [isLoading, setIsLoading] = useState(false);
     const [showEmailPrompt, setShowEmailPrompt] = useState(false);
     const [pendingQuestion, setPendingQuestion] = useState("");
+    const [sessionId, setSessionId] = useState(() => Math.random().toString(36).substring(7) + Date.now().toString(36));
 
     const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -48,11 +49,15 @@ export default function Chatbot() {
             const res = await fetch("/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: userMessage.text, history }),
+                body: JSON.stringify({ message: userMessage.text, history, sessionId }),
             });
 
             const data = await res.json();
 
+            if (data.sessionId) {
+                // Update the sessionId if the server created a new one
+                setSessionId(data.sessionId);
+            }
 
             if (data.reply && data.reply.includes("I_DONT_KNOW_EXACTLY")) {
                 setPendingQuestion(userMessage.text);
@@ -99,7 +104,7 @@ export default function Chatbot() {
     };
 
     return (
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none"> {/* Container pointer events none so simple spacing doesn't block */}
+        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end pointer-events-none">
 
             <AnimatePresence>
                 {isOpen && (
@@ -107,7 +112,7 @@ export default function Chatbot() {
                         initial={{ opacity: 0, scale: 0.8, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.8, y: 20 }}
-                        className="mb-4 w-[350px] max-w-[calc(100vw-48px)] h-[500px] bg-[var(--secondary-bg)] rounded-2xl shadow-2xl border border-gray-700 flex flex-col overflow-hidden pointer-events-auto"
+                        className="mb-4 w-[calc(100vw-32px)] sm:w-[350px] max-w-[420px] h-[75vh] sm:h-[500px] max-h-[600px] bg-[var(--secondary-bg)] rounded-2xl shadow-2xl border border-gray-700 flex flex-col overflow-hidden pointer-events-auto"
                     >
                         {/* Header */}
                         <div className="p-4 bg-[var(--primary-bg)] border-b border-gray-700 flex justify-between items-center">

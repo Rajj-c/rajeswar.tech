@@ -144,7 +144,7 @@ export default function Contact() {
 
                 {/* Footer simple mark */}
                 <div className="mt-20 pt-8 border-t border-white/5 text-center">
-                    <p className="text-gray-500 text-sm">© 2025 Rajeswar Charapalli.</p>
+                    <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Rajeswar Charapalli.</p>
                 </div>
             </div>
         </section>

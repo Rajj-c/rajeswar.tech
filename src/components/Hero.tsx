@@ -50,7 +50,7 @@ const TextDecrypt = ({ text }: { text: string }) => {
 
 const ThreeDScene = () => {
     return (
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-40 mix-blend-screen">
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-40 mix-blend-screen hidden sm:block">
             <Canvas>
                 <PerspectiveCamera makeDefault position={[0, 0, 10]} />
                 <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
@@ -178,7 +178,7 @@ export default function Hero() {
                     viewport={{ once: false }}
                     className="overflow-hidden mb-6"
                 >
-                    <h1 className="flex flex-col items-center justify-center text-5xl md:text-7xl lg:text-9xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-gray-500 leading-[0.9] drop-shadow-2xl">
+                    <h1 className="flex flex-col items-center justify-center text-[11vw] sm:text-5xl md:text-7xl lg:text-9xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-gray-500 leading-[0.9] drop-shadow-2xl">
                         <div className="whitespace-nowrap">
                             {"RAJESWAR".split("").map((char, index) => (
                                 <motion.span key={index} variants={letterAnimation} className="inline-block hover:text-[var(--accent-color)] transition-colors duration-300">
@@ -271,11 +271,11 @@ export default function Hero() {
             </div>
 
             {/* Bottom Right Floating Card from Uiverse */}
-            <div className="absolute overflow-visible bottom-4 right-4 md:bottom-12 md:right-12 z-50 scale-[0.7] md:scale-100 origin-bottom-right">
+            <div className="absolute overflow-visible bottom-4 right-4 md:bottom-12 md:right-12 z-50 scale-[0.55] xs:scale-[0.65] md:scale-100 origin-bottom-right">
                 <div tabIndex={0} className="relative duration-300 transition-transform [transform:rotate3d(1_,-1,_1,_60deg)] hover:[transform:rotate3d(1_,-1,_1,_0deg)] focus:[transform:rotate3d(1_,-1,_1,_0deg)] active:[transform:rotate3d(1_,-1,_1,_0deg)] focus-within:[transform:rotate3d(1_,-1,_1,_0deg)] group border border-sky-900 border-4 overflow-hidden rounded-2xl h-52 w-72 bg-sky-800 p-5 flex flex-col items-start gap-4 shadow-2xl cursor-pointer">
                     <div className="text-gray-50 z-20 relative">
                         <span className="font-bold text-5xl">RAJ</span>
-                        <p className="text-xs">Software Engineer</p>
+                        <p className="text-xs">CS Student & SIH Winner 🏆</p>
                     </div>
                     {/* Trigger for the Resume Modal */}
                     <button 

@@ -62,8 +62,8 @@ function WorkModal({ type, onClose }: WorkModalProps) {
                                 </span>
                                 <ExternalLink size={18} className="text-[var(--accent-color)] group-hover:translate-x-1 transition-transform" />
                             </a>
-                            <div className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 mt-2">
-                                <p className="text-blue-200 text-sm">Status: Internship training in progress.</p>
+                            <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20 mt-2">
+                                <p className="text-green-200 text-sm">Status: Internship training completed. ✅</p>
                             </div>
                         </div>
                     </div>

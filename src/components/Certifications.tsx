@@ -80,7 +80,7 @@ const certifications = [
     },
     {
         title: "Database Management",
-        issuer: "Codechef",
+        issuer: "CodeChef",
         description: "Advanced SQL queries, normalization, and database optimization.",
         year: "2025",
         link: "https://drive.google.com/file/d/1ksOz7avh1TxrFpSnaYxtnMyX2KcBXWlg/view?usp=drive_link",

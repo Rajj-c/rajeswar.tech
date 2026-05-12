@@ -145,7 +145,7 @@ export default function Achievements() {
                                         </div>
 
                                         <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 leading-tight">Smart India Hackathon 2025</h3>
-                                        <p className="text-xl text-gray-300 mb-6 font-light">Champion of the india's biggest open innovation model.</p>
+                                        <p className="text-xl text-gray-300 mb-6 font-light">Champion of India's biggest open innovation model.</p>
 
                                         <p className="text-gray-400 leading-relaxed mb-6">
                                             Solved complex problems using cutting-edge Generative AI solutions. Outperforming thousands of teams nationwide through resilience, technical prowess, and innovative thinking.

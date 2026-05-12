@@ -22,7 +22,21 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Rajeswar Charapalli | Portfolio",
   description: "Portfolio of Rajeswar Charapalli, a CSE Student, Web Developer and SIH Winner.",
+  other: {
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+  },
 };
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  interactiveWidget: "resizes-content",
+};
+
 
 export default function RootLayout({
   children,

@@ -203,10 +203,10 @@ export default function About() {
                             <div className="p-6 bg-[var(--secondary-bg)]/50 border border-white/5 rounded-2xl">
                                 <div className="flex items-center gap-3 mb-2 text-[var(--accent-color)]">
                                     <Calendar size={20} />
-                                    <span className="text-sm font-bold uppercase tracking-wider">Experience</span>
+                                    <span className="text-sm font-bold uppercase tracking-wider">Age</span>
                                 </div>
-                                <p className="text-2xl font-bold text-white">{age || '20+'} Years</p>
-                                <p className="text-sm text-gray-500">Alive & Coding</p>
+                                <p className="text-2xl font-bold text-white">{age || '21'}</p>
+                                <p className="text-sm text-gray-500">Building &amp; Growing</p>
                             </div>
                             <div className="p-6 bg-[var(--secondary-bg)]/50 border border-white/5 rounded-2xl">
                                 <div className="flex items-center gap-3 mb-2 text-[var(--accent-color)]">

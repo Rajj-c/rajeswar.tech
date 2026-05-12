@@ -79,7 +79,7 @@ export default function Skills() {
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4"> Technical Arsenal </h2>
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Technical Arsenal</h2>
                         <p className="text-[var(--secondary-text)] max-w-2xl mx-auto">
                             Tools and technologies I use to build independent AI systems.
                         </p>
