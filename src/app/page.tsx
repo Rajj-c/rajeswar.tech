@@ -6,7 +6,7 @@ import Achievements from '@/components/Achievements';
 import AcademicJourneyBanner from '@/components/AcademicJourneyBanner';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import Chatbot from '@/components/Chatbot';
+// import Chatbot from '@/components/Chatbot'; // 🚧 Rebuilding with ADK — coming soon
 
 export default function Home() {
   return (
@@ -19,7 +19,7 @@ export default function Home() {
       <AcademicJourneyBanner />
       <Contact />
       <Footer />
-      <Chatbot />
+      {/* <Chatbot /> */} {/* 🚧 ADK Agent coming soon */}
     </main>
   );
 }
