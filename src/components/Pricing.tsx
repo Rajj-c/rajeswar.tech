@@ -553,18 +553,44 @@ export default function Pricing() {
                                             Input the secret unlock key posted on my LinkedIn profile to reveal transparent partner rates.
                                         </p>
 
-                                        <form onSubmit={handleVerifyKey} className="space-y-3">
-                                            <input
-                                                type="text"
-                                                placeholder="ENTER SECRET KEY"
-                                                value={accessKeyInput}
-                                                onChange={(e) => {
-                                                    setAccessKeyInput(e.target.value);
-                                                    if (errorMsg) setErrorMsg('');
-                                                }}
-                                                className="w-full bg-black/50 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white uppercase text-center font-mono font-bold tracking-widest focus:outline-none focus:border-amber-500"
-                                                autoFocus
-                                            />
+                                        <form onSubmit={handleVerifyKey} className="space-y-6">
+                                            <div className="glitch-input-wrapper">
+                                                <div className="input-container">
+                                                    <input
+                                                        type="text"
+                                                        id="holo-input"
+                                                        className="holo-input"
+                                                        placeholder=" "
+                                                        required
+                                                        value={accessKeyInput}
+                                                        onChange={(e) => {
+                                                            setAccessKeyInput(e.target.value);
+                                                            if (errorMsg) setErrorMsg('');
+                                                        }}
+                                                        autoFocus
+                                                    />
+                                                    <label htmlFor="holo-input" className="input-label" data-text="ACCESS_CODE">
+                                                        ACCESS_CODE
+                                                    </label>
+
+                                                    <div className="input-border"></div>
+                                                    <div className="input-scanline"></div>
+                                                    <div className="input-glow"></div>
+
+                                                    <div className="input-data-stream">
+                                                        {[...Array(10)].map((_, i) => (
+                                                            <div key={i} className="stream-bar" style={{ '--i': i } as React.CSSProperties}></div>
+                                                        ))}
+                                                    </div>
+
+                                                    <div className="input-corners">
+                                                        <div className="corner corner-tl"></div>
+                                                        <div className="corner corner-tr"></div>
+                                                        <div className="corner corner-bl"></div>
+                                                        <div className="corner corner-br"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             {errorMsg && (
                                                 <p className="text-[10px] text-red-400 text-center font-medium">{errorMsg}</p>
                                             )}
@@ -598,6 +624,203 @@ export default function Pricing() {
                     </div>
                 )}
             </AnimatePresence>
+            
+            {/* Embedded CSS for the Glitch Input matching the Gold/Amber Theme */}
+            <style dangerouslySetInnerHTML={{ __html: `
+            /* --- Root Variables & Wrapper --- */
+            .glitch-input-wrapper {
+              --bg-color: #0d0d0d;
+              --primary-color: #F59E0B; /* Amber 500 */
+              --secondary-color: #FBBF24; /* Amber 400 */
+              --text-color: #e5e5e5;
+              --font-family: var(--font-outfit), "Fira Code", Consolas, monospace;
+              --glitch-anim-duration: 0.4s;
+              
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-family: var(--font-family);
+              font-size: 16px;
+              width: 100%;
+              padding: 0.5rem 0;
+            }
+
+            /* --- Container  --- */
+            .input-container {
+              position: relative;
+              width: 100%;
+            }
+
+            /* --- Input --- */
+            .holo-input {
+              width: 100%;
+              height: 3.5rem;
+              background: rgba(13, 13, 13, 0.7);
+              border: none;
+              border-bottom: 2px solid rgba(245, 158, 11, 0.3);
+              outline: none;
+              padding: 0 1rem;
+              color: var(--primary-color);
+              font-family: monospace;
+              font-size: 1.1rem;
+              font-weight: 700;
+              letter-spacing: 0.15em;
+              text-align: center;
+              caret-color: var(--primary-color);
+              z-index: 10;
+              transition: background 0.3s ease, border-color 0.3s ease;
+            }
+
+            /* --- Floating Label --- */
+            .input-label {
+              position: absolute;
+              top: 1.1rem;
+              left: 50%;
+              transform: translateX(-50%);
+              color: var(--text-color);
+              opacity: 0.5;
+              font-family: monospace;
+              font-weight: bold;
+              text-transform: uppercase;
+              letter-spacing: 0.1em;
+              pointer-events: none;
+              transition: all 0.3s ease;
+              z-index: 11;
+            }
+            .holo-input:focus + .input-label,
+            .holo-input:not(:placeholder-shown) + .input-label {
+              top: -1.2rem;
+              left: 0;
+              transform: none;
+              font-size: 0.75rem;
+              opacity: 1;
+              color: var(--primary-color);
+            }
+
+            .holo-input:focus + .input-label::before,
+            .holo-input:focus + .input-label::after {
+              content: attr(data-text);
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: transparent;
+            }
+            .holo-input:focus + .input-label::before {
+              color: var(--secondary-color);
+              animation: glitch-label var(--glitch-anim-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            }
+            .holo-input:focus + .input-label::after {
+              color: var(--primary-color);
+              animation: glitch-label var(--glitch-anim-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both;
+            }
+
+            /* --- Decorative Layers --- */
+            .input-border,
+            .input-scanline,
+            .input-glow,
+            .input-corners {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              pointer-events: none;
+            }
+            .input-border {
+              border: 1px solid rgba(245, 158, 11, 0.2);
+              opacity: 0.5;
+              transition: all 0.3s ease;
+            }
+            .corner {
+              position: absolute;
+              width: 0.75rem;
+              height: 0.75rem;
+              border: 2px solid var(--primary-color);
+              transition: all 0.3s ease;
+              opacity: 0.5;
+            }
+            .corner-tl { top: -0.2rem; left: -0.2rem; border-right: none; border-bottom: none; }
+            .corner-tr { top: -0.2rem; right: -0.2rem; border-left: none; border-bottom: none; }
+            .corner-bl { bottom: -0.2rem; left: -0.2rem; border-right: none; border-top: none; }
+            .corner-br { bottom: -0.2rem; right: -0.2rem; border-left: none; border-top: none; }
+
+            .input-glow {
+              background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+              opacity: 0;
+              transition: opacity 0.4s ease;
+            }
+
+            .input-scanline {
+              height: 100%;
+              background: linear-gradient(to bottom, transparent 0%, rgba(245, 158, 11, 0.05) 48%, rgba(245, 158, 11, 0.2) 50%, rgba(245, 158, 11, 0.05) 52%, transparent 100%);
+              opacity: 0;
+            }
+
+            /* --- Data Visualization --- */
+            .input-data-stream {
+              position: absolute;
+              bottom: 2px;
+              left: 0;
+              width: 100%;
+              height: 0.25rem;
+              display: flex;
+              opacity: 0;
+              transition: opacity 0.3s ease 0.1s;
+            }
+            .stream-bar {
+              flex-grow: 1;
+              background-color: var(--primary-color);
+              transition: transform 0.2s, opacity 0.2s;
+              transform: scaleY(0);
+              transform-origin: bottom;
+            }
+
+            .holo-input:focus {
+              border-color: transparent;
+              background: rgba(0, 0, 0, 0.4);
+            }
+            .holo-input:focus ~ .input-border {
+              opacity: 1;
+              border-color: rgba(245, 158, 11, 0.5);
+            }
+            .holo-input:focus ~ .input-corners .corner {
+              width: 1rem;
+              height: 1rem;
+              border-width: 3px;
+              opacity: 1;
+            }
+            .holo-input:focus ~ .input-glow { opacity: 1; }
+            .holo-input:focus ~ .input-scanline { animation: scan-vertical 4s linear infinite; }
+            .holo-input:focus ~ .input-data-stream { opacity: 1; }
+            .holo-input:focus ~ .input-data-stream .stream-bar {
+              animation: data-pulse 2s infinite;
+              animation-delay: calc(var(--i) * 0.1s);
+            }
+
+            /* --- Keyframes --- */
+            @keyframes glitch-label {
+              0% { transform: translate(0); clip-path: inset(0 0 0 0); }
+              20% { transform: translate(-0.2rem, 0.1rem); clip-path: inset(50% 0 20% 0); }
+              40% { transform: translate(0.1rem, -0.1rem); clip-path: inset(20% 0 60% 0); }
+              60% { transform: translate(-0.15rem, 0.1rem); clip-path: inset(80% 0 5% 0); }
+              80% { transform: translate(0.15rem, -0.15rem); clip-path: inset(30% 0 45% 0); }
+              100% { transform: translate(0); clip-path: inset(0 0 0 0); }
+            }
+
+            @keyframes scan-vertical {
+              0% { opacity: 0; transform: translateY(-100%); }
+              25% { opacity: 0.5; }
+              75% { opacity: 0.5; }
+              100% { opacity: 0; transform: translateY(100%); }
+            }
+
+            @keyframes data-pulse {
+              0%, 100% { transform: scaleY(0.2); opacity: 0.3; }
+              50% { transform: scaleY(1); opacity: 0.8; }
+            }
+            `}} />
         </section>
     );
 }
