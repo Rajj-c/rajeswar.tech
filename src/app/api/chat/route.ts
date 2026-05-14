@@ -13,7 +13,7 @@ export async function POST(req: Request) {
         try {
             const sessionCheckRes = await fetch(
                 `${ADK_SERVER_URL}/apps/${APP_NAME}/users/${USER_ID}/sessions/${activeSessionId}`,
-                { signal: AbortSignal.timeout(5000) }
+                { signal: AbortSignal.timeout(15000) }
             );
 
             // If session doesn't exist, create one
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({}),
-                        signal: AbortSignal.timeout(5000),
+                        signal: AbortSignal.timeout(15000),
                     }
                 );
                 if (createRes.ok) {
@@ -59,7 +59,7 @@ export async function POST(req: Request) {
 
         if (!runRes.ok) {
             return NextResponse.json(
-                { error: "unavailable", sessionId: activeSessionId },
+                { error: "unavailable", sessionId: activeSessionId, details: await runRes.text() },
                 { status: runRes.status }
             );
         }
@@ -90,7 +90,7 @@ export async function POST(req: Request) {
     } catch (err: any) {
         const isTimeout = err?.name === "TimeoutError" || err?.name === "AbortError";
         return NextResponse.json(
-            { error: isTimeout ? "timeout" : "unavailable" },
+            { error: isTimeout ? "timeout" : "unavailable", details: err?.message },
             { status: 503 }
         );
     }
