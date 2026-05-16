@@ -264,7 +264,7 @@ export default function Chatbot() {
     ]);
     const [isLoading, setIsLoading] = useState(false);
     const [chatError, setChatError] = useState<ChatError>(null);
-    const [sessionId] = useState(() => `sess_${Date.now()}_${Math.random().toString(36).slice(2)}`);
+    const [sessionId, setSessionId] = useState(() => `sess_${Date.now()}_${Math.random().toString(36).slice(2)}`);
     const bottomRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -300,6 +300,7 @@ export default function Chatbot() {
             } else if (!res.ok || data.error) {
                 setChatError("unavailable");
             } else {
+                if (data.sessionId) setSessionId(data.sessionId);
                 setMessages(prev => [...prev, { id: Date.now() + 1, role: "bot", text: data.reply }]);
             }
         } catch {
